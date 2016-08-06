@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamKit2", "SteamKit2\SteamKit2.csproj", "{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushToPlay.Helpers", "PushToPlay.Helpers\PushToPlay.Helpers.csproj", "{A2BDC786-F676-4482-BCF8-A492BA4B47CC}"
@@ -25,31 +27,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{43F975
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{40ED7748-B1A0-4514-BE33-1BAF130AC343}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+	EndProjectSection
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://pushtoplay.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = PushToPlay.Core\\PushToPlay.Core.csproj
-		SccProjectName1 = PushToPlay.Core
-		SccLocalPath1 = PushToPlay.Core
-		SccProjectUniqueName2 = PushToPlay.Helpers\\PushToPlay.Helpers.csproj
-		SccProjectName2 = PushToPlay.Helpers
-		SccLocalPath2 = PushToPlay.Helpers
-		SccProjectUniqueName3 = PushToPlay.Model\\PushToPlay.Model.csproj
-		SccProjectName3 = PushToPlay.Model
-		SccLocalPath3 = PushToPlay.Model
-		SccProjectUniqueName4 = PushToPlay.WEB\\PushToPlay.WEB.csproj
-		SccProjectName4 = PushToPlay.WEB
-		SccLocalPath4 = PushToPlay.WEB
-		SccProjectUniqueName5 = PushToPlay.WinForm\\PushToPlay.WinForm.csproj
-		SccProjectName5 = PushToPlay.WinForm
-		SccLocalPath5 = PushToPlay.WinForm
-		SccProjectUniqueName6 = SteamKit2\\SteamKit2.csproj
-		SccProjectName6 = SteamKit2
-		SccLocalPath6 = SteamKit2
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
