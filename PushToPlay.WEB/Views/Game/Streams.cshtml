@@ -1,0 +1,36 @@
+﻿@model PushToPlay.WEB.Models.GameStreamsViewModel
+
+@{
+    //ViewBag.Title = "StreamList";
+    Layout = "~/Views/Shared/Game/_LayoutGameProfile.cshtml";  
+}
+
+@section content{
+
+    <div style="padding-left:10px;padding-top:10px;">
+
+        @if(Model.TwitchStreams != null &&
+            Model.TwitchStreams.streams != null &&
+            Model.TwitchStreams.streams.Count > 0)
+        {
+            foreach(var _stream in Model.TwitchStreams.streams)
+            {
+                var _compactStreamView = new PushToPlay.WEB.Models.StreamCompactViewModel(_stream);
+                
+                _compactStreamView.ObjectId = Model.GameDetailId;
+                _compactStreamView.ObjectName = Model.GameName;
+
+                Html.RenderPartial("StreamCompactView", _compactStreamView);
+            }
+        }
+        else            
+        {
+            <div style="padding-left: 10px; padding-top: 5px; padding-bottom: 5px;padding-right:10px;display:inline-block" class="displayAreaColor">
+                <span class="fieldTextStrong">Nenhuma transmissão ao vivo no momento.</span>
+            </div>
+        }
+
+    </div>
+
+}
+

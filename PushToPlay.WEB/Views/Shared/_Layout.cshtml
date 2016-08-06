@@ -1,0 +1,189 @@
+﻿@using PushToPlay.WEB;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="PushToPlay">
+    <meta name="author" content="Leonardo Dimano">
+    <meta name="keywords" content="pushtoplay, clan, clans, jogos, games, grupos, groups, rede, social">
+
+    @if (ViewBag.Title == null)
+    {
+        ViewBag.Title = "Push To Play";
+    }
+
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/themes/base/reveal.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="backGroundColor">
+    <div id="Home_Header" class="PushToPlayContentWindow displayAreaColor">
+        <div class="logoDiv">
+            <a href="/" class="marginLeft10"><span class="element brand fieldText">PushToPlay ® <small class="fieldTextStrong">A rede social dos gamers</small></span></a>
+        </div>
+        @{var _user = WebHelper.GetLoggedUser();
+            <div class="fastTabDiv">
+                @if (_user != null)
+                {
+                    if (ViewData[Constants.VIEWDATA_DRAW_LOGIN_BAR] == null)
+                    {                              
+                    <div class="tableCell profileBarItem" style="vertical-align: middle">
+                    </div>
+                    <div class="tableCell profileBarItem" style="vertical-align: middle">
+                        <a href="@Url.Action("friends", "user", new { id = _user.UserName.ToLower() })" class="no-margin no-border no-padding linkItem">
+                            <i class="icon-user"></i>
+                        </a>
+                    </div>
+                    <div class="tableCell profileBarItem" style="vertical-align: middle">
+                        <a href="@Url.Action("game", "user", new { id = _user.UserName.ToLower() })" class="no-margin no-border no-padding linkItem">
+                            <i class="icon-target-2"></i>
+                        </a>
+                    </div>
+                    <div class="tableCell profileBarItem" style="vertical-align: middle">
+                        <a href="@Url.Action("home", "user", new { id = _user.UserName.ToLower() })" class="no-margin no-border no-padding linkItem">
+                            <i class="icon-cube-2"></i>
+                        </a>
+                    </div>
+                    <div class="tableCell profileBarItem" style="vertical-align: middle">
+                        <a href="@Url.Action("home", "user", new { id = _user.UserName.ToLower() })" class="no-margin no-border no-padding linkItem">
+                            <i class="icon-cube"></i>
+                        </a>
+                    </div>
+                    <div class="tableCell profileBarItem" style="vertical-align: middle">
+                        <a href="@Url.Action("home", "user", new { id = _user.UserName.ToLower() })" class="no-margin no-border no-padding linkItem">
+                            <i class="icon-calendar"></i>
+                        </a>
+                    </div>
+                    <div class="tableCell profileBarItem" style="vertical-align: middle">
+                        <a href="@Url.Action("home", "user", new { id = _user.UserName.ToLower() })" class="no-margin no-border no-padding linkItem">
+                            @_user.Name
+                        </a>
+                    </div>
+                    <div class="tableCell profileBarItem">
+                        <a href="@Url.Action("home", "user", new { id = _user.UserName.ToLower() })" class="no-padding no-border no-margin">
+                            <img src="@WebHelper.GetUserImagePath(_user.Id, true)"  class="profileBarImage no-padding no-border no-margin"/>
+                        </a>
+                    </div>
+                    }
+                    else
+                    {
+                        ViewData[Constants.VIEWDATA_DRAW_LOGIN_BAR] = null;
+                    }
+                }
+                else
+                {
+                    if (ViewData[Constants.VIEWDATA_DRAW_LOGIN_BAR] == null)
+                    {
+                    @Html.ActionLink("Entrar!", "login", "user", null, new { @class = "fieldText", @style = "font-weight: bold" })<span class="fieldTextStrong"> Ainda não é cadastrado? </span>@Html.ActionLink("Cadastre-se!", "Register", "User", null, new { @class = "fieldText", style = "font-weight: bold;margin-right:10px;" })
+                    }
+                    else
+                    {
+                        ViewData[Constants.VIEWDATA_DRAW_LOGIN_BAR] = null;
+                    }
+                }
+            </div>
+        }
+        <div class="clearBoth"></div>
+    </div>
+    <div class="PushToPlayContentWindow contentColor crossLine"></div>
+    <div class="PushToPlayContentWindow displayAreaColor marginBottom10">
+        <div class="leftItem">
+            <a href="@Url.Action("search", "user")">
+                <div class="menuItem">
+                    <i class="icon-user no-margin no-padding"></i>
+                    Usuários
+                </div>
+            </a>
+        </div>
+        <div class="leftItem">
+            <a href="@Url.Action("search", "game")">
+                <div class="menuItem">
+                    <i class="icon-target-2 no-margin no-padding"></i>
+                    Jogos
+                </div>
+            </a>
+        </div>
+        <div class="leftItem">
+            <a href="@Url.RouteUrl(Constants.ROUTE_GROUP_SEARCH)">
+                <div class="menuItem">
+                    <i class="icon-cube-2 no-margin no-padding"></i>
+                    Grupos
+                </div>
+            </a>
+        </div>
+        <div class="leftItem">
+            <a href="/">
+                <div class="menuItem">
+                    <i class="icon-cube no-margin no-padding"></i>
+                    Clans
+                </div>
+            </a>
+        </div>
+        <div class="leftItem">
+            <a href="/">
+                <div class="menuItem">
+                    <i class="icon-calendar no-margin no-padding"></i>
+                    Eventos
+                </div>
+            </a>
+        </div>
+        @if (_user != null)
+        {
+            <div style="display: inline-block; float: right">
+                <a href="@Url.Action("logout", "user")">
+                    <div class="menuItem">
+                        Sair
+                    </div>
+                </a>
+            </div>
+            <div style="display: inline-block; float: right">
+                <a href="@Url.Action("profile", "user")">
+                    <div class="menuItem">
+                        Gerenciar
+                    </div>
+                </a>
+            </div>                                    
+        }
+    </div>
+    <div class="PushToPlayContentWindow contentColor" style="min-height: 830px; margin: 0 auto">
+        @RenderBody()
+    </div>
+    <div class="PushToPlayContentWindow backgroundColor" style="height: 10px"></div>
+    <div class="PushToPlayContentWindow displayAreaColor" style="text-align: center">
+        <small class="fieldTextStrong">Powered by GiantBomb</small><br />
+        <small class="fieldTextStrong">Powered by Steam</small>
+    </div>
+    <div id="myModal" class="reveal-modal" style="width: 1px">
+        @using (Ajax.BeginForm("fastlogin",
+                                   "user",
+                                   new AjaxOptions()
+                                   {
+                                       HttpMethod = "Post",
+                                       InsertionMode = InsertionMode.Replace,
+                                       UpdateTargetId = "loginAjax",
+                                       OnSuccess = "HandleLogin(data, null)"
+                                   }
+                                   ))
+        {
+            Html.RenderPartial("LoginPartial", new PushToPlay.WEB.Models.UserLoginViewModel());
+        }
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-54369952-1', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

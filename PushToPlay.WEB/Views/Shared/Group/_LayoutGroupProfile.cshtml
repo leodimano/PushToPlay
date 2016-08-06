@@ -1,0 +1,112 @@
+﻿@using PushToPlay.WEB;
+
+@model PushToPlay.WEB.Models.GroupHomeViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = string.Concat("Push To Play - ", Model.GroupName);
+}
+
+<div style="padding-left: 10px; padding-top: 10px; padding-right: 10px;">
+    <div class="displayAreaColor">
+        <!-- image div -->
+        <div class="leftItem displayAreaColor profilePanelImageCell">
+            <a href="@Url.RouteUrl(Constants.ROUTE_GROUP_HOME, new { id = Model.GroupId, name = WebHelper.ProcessUrlEnconding(Model.GroupName) })">
+                <img class="profileImageSize border-color borderColorStrong" src="@WebHelper.GetGroupImagePath(Model.GroupId, true)"/>
+            </a>
+        </div>
+        <!-- content div -->
+        <div class="leftItem displayAreaColor profilePanelDataCell" style="display: inline-block">
+            <div style="float: right; margin-top: 6px;">
+                <div class="rightItemUserCard">
+                    <div style="text-align: center">
+                        <i class="icon-calendar fieldTextStrong"></i>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="" class="fieldTextStrong">0</a>
+                    </div>
+                </div>
+                <div class="rightItemIcon">
+                    <div style="text-align: center">
+                        <i class="icon-target-2 fieldTextStrong"></i>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="" class="fieldTextStrong">0</a>
+                    </div>
+                </div>
+                <div class="rightItemIcon">
+                    <div style="text-align: center">
+                        <i class="icon-user fieldTextStrong"></i>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="" class="fieldTextStrong">0</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="@Url.RouteUrl(Constants.ROUTE_GROUP_HOME, new { id = Model.GroupId, name = WebHelper.ProcessUrlEnconding(Model.GroupName) })">
+                <h2 class="fieldText no-margin">@Model.GroupName</h2>
+            </a>
+            @*<small class="fieldTextStrong" style="margin-left: 5px;">@Model.CurrentUser.UserName</small>*@
+            <div class="contentColor" style="height: 1px; margin-right: -10px; margin-top: 22px;"></div>
+            <div style="width: 730px;">
+                <div style="float: right">
+                    @if (Model.LoggedUser != null)
+                    {
+                        if (Model.UserHas)
+                        {
+                        <a href="@Url.RouteUrl(Constants.ROUTE_GROUP_LEAVE, new { id = Model.GroupId })">
+                            <button type="button" class="buttonNOkNoMargin"><i class="icon-minus"></i>Remover</button>
+                        </a>
+                        }
+                        else
+                        {
+                        <a href="@Url.RouteUrl(Constants.ROUTE_GROUP_JOIN, new { id = Model.GroupId })">
+                            <button type="button" class="buttonOkNoMargin"><i class="icon-plus"></i>Adicionar</button>
+                        </a>
+                        }
+                    }
+                </div>
+                <div style="margin-top: 10px;">
+                    <span class="fieldTextStrong">@Model.GroupDescription</span>
+                </div>
+            </div>
+        </div>
+        <div class="clearBoth"></div>
+        <div class="contentColor" style="height: 1px; margin-right: -10px; margin-left: -10px;">
+        </div>
+        <div class="displayAreaColor" style="padding-left: 10px; padding-top: 5px; padding-right: 10px; padding-bottom: 7px;">
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="" class="no-padding no-margin">
+                    <div class="fieldText">
+                        <i class="icon-user no-margin no-padding"></i>
+                        Jogadores
+                    </div>
+                </a>
+            </div>
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="" class="no-padding no-margin">
+                    <div class="fieldText">
+                        <i class="icon-target-2 no-margin no-padding"></i>
+                        Jogos
+                    </div>
+                </a>
+            </div>
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="/" class="no-padding no-margin">
+                    <div class="fieldText">
+                        <i class="icon-calendar no-margin no-padding"></i>
+                        Eventos
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 10px; vertical-align: top">
+    @RenderSection("Content", true)
+</div>
+
+@section scripts{
+    @RenderSection("scripts", false)
+}

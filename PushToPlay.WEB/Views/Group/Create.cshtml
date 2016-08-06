@@ -1,0 +1,47 @@
+﻿@model PushToPlay.WEB.Models.GroupCreateViewModel
+
+@{
+    ViewBag.Title = string.Concat("Push To Play - Criar novo crupo");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (@Html.BeginForm("create", "group", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="padding10NoBottom">
+        <div class="displayAreaColor padding5">
+            <h3 class="fieldText">Criar grupo</h3>
+            <div class="contentColor" style="height: 1px; margin-right: -10px; margin-left: -10px;"></div>
+            <div class="marginTop10">
+                @Html.LabelFor(m => m.Name, new { @class = "fieldTextStrong" })
+            </div>
+            <div class="controlSeparator">
+                @Html.TextBoxFor(m => m.Name, new { @class = "normalTextBox", style = "width:420px;", maxlength = "50" })<br />
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "errorTextStrong" })
+            </div>
+            <div class="marginTop10">
+                @Html.LabelFor(m => m.Description, new { @class = "fieldTextStrong" })
+            </div>
+            <div class="controlSeparator">
+                @Html.TextAreaFor(m => m.Description, new { @class = "normalTextArea", @style = "width:700px;" })<br />
+                @Html.ValidationMessageFor(m => m.Description, "", new { @class = "errorTextStrong" })
+            </div>
+            <div class="marginTop10">
+                @Html.LabelFor(m => m.Image, new { @class = "fieldTextStrong" })
+            </div>
+            <div class="controlSeparator">
+                <button class="buttonOkNoMargin" style="position: absolute; cursor: pointer">Escolher</button>
+                <input class="border-color" type="file" name="file" id="file" style="width: 90px; height: 33px; position: absolute; opacity: 0; cursor: pointer" accept="image/x-png, image/gif, image/jpeg" />
+                <div style="position: relative; margin-left: 100px; height: 37px;">
+                    <div style="height: 7px"></div>
+                </div>
+            </div>
+            <div class="contentColor" style="height: 1px; margin-top: 5px; margin-right: -10px; margin-left: -10px;"></div>
+            <div class="marginTop10" style="text-align:right">
+                <button type="submit" class="buttonOkNoMargin">Criar</button>
+            </div>
+
+        </div>
+    </div>
+}
+
+

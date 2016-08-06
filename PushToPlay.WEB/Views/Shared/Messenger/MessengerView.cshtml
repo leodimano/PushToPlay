@@ -1,0 +1,191 @@
+﻿@using PushToPlay.WEB;
+@using PushToPlay.WEB.Models;
+@using PushToPlay.Model;
+@using System.Collections;
+
+@model MessengerViewModel
+
+@{       
+    string classFieldTextStrong = "fieldTextStrong";
+    string classfieldText = "fieldText";
+    string classLinkText = "linkItem";
+
+    if (Model.PlatformId.HasValue)
+    {
+        classLinkText = PushToPlay.Helpers.NetHelper.GetCSSLinkGame(Model.PlatformId.Value);
+        classfieldText = PushToPlay.Helpers.NetHelper.GetCSSNormalTextGame(Model.PlatformId.Value);
+        classFieldTextStrong = PushToPlay.Helpers.NetHelper.GetCSSStrongTextGame(Model.PlatformId.Value);
+    }
+
+    string _imageName = string.Empty;
+    string _paddingLeft = string.Empty;
+
+    string _postedLink = string.Empty;
+    string _postedName = string.Empty;
+    string _postedMessage = string.Empty;
+
+    string _postedOnLink = string.Empty;
+    string _postedOn = string.Empty;
+    string _postedOnLinkCSS = string.Empty;
+
+    string _replyDivId = string.Empty;
+    string _replyTextAreaId = string.Empty;
+    string _replyCommentId = string.Empty;
+
+    System.Collections.Hashtable _imgTable = new System.Collections.Hashtable();
+
+    bool ModelOwner = false;
+
+    int _size = 548;
+    int _marginLeft = 0;
+       
+}
+
+
+<div class="displayAreaColor" style="margin-bottom: 10px; padding-top: 4px; padding-bottom: 10px;">
+    <span class="@classFieldTextStrong" style="margin-left:10px;">Deixe um comentário</span>
+    <div class="contentColor" style="height: 1px; margin-left: -10px; margin-top: 5px; margin-bottom: 3px; margin-right: -10px;"></div>
+    <div style="margin-right: 15px; margin-left: 10px; margin-top: 10px; margin-bottom: 10px;">
+        @Html.TextArea("AreaComment", new { @class = "normalTextArea", @style = "width:100%;" })
+    </div>
+    <div style="text-align: right; margin-right: 10px;">
+        <button id="CommentButton" 
+                class="buttonOkNoMargin no-margin no-padding no-border" 
+                data-uid="@Model.BaseId"
+                data-type="@((int)Model.BaseType)" 
+                data-target-id="@Model.TargetId"
+                data-target-type="@((int)Model.TargetType)">
+            Comentar</button>
+    </div>
+</div>
+
+@if (Model.MessageList.TotalObject > 0)
+{
+    foreach (var _message in Model.MessageList.Objects)
+    {
+        _marginLeft = 0;
+
+        if (_message.ReplyToMessage.HasValue &&
+            _message.ReplyToMessage.Value >= 1)
+        {
+            _marginLeft = 30;
+        }
+
+        ModelOwner = false;
+
+        switch (_message.BaseType)
+        {
+            case (int)MessageSourceTypeEnum.User:
+
+                if (_imgTable.ContainsKey(string.Concat("user", _message.BaseId)))
+                {
+                    _imageName = (string)_imgTable[string.Concat("user", _message.BaseId)];
+                }
+                else
+                {
+                    _imageName = WebHelper.GetUserImagePath(_message.BaseId.Value, true);
+                    _imgTable.Add(string.Concat("user", _message.BaseId), _imageName);
+                }
+
+                _postedLink = Url.RouteUrl(Constants.ROUTE_USER_HOME, new { id = _message.BaseUserName.ToLower() });
+
+                _postedName = string.IsNullOrWhiteSpace(_message.BaseName) ? _message.BaseUserName : _message.BaseName;
+
+                if (_message.BaseId == WebHelper.GetLoggedUserId())
+                {
+                    ModelOwner = true;
+                }
+
+                break;
+        }
+
+        switch (_message.TargetType)
+        {
+            case (int)PushToPlay.Model.MessageSourceTypeEnum.User:
+
+                _postedOnLinkCSS = classLinkText;
+
+                if (_message.BaseId != _message.TargetID)
+                {
+                    _postedOnLink = Url.Action("home", "user", new { id = _message.TargetUserName.ToLower() });
+                    _postedOn = string.IsNullOrWhiteSpace(_message.TargetName) ? _message.TargetUserName.ToLower() : _message.TargetName;
+
+                    if (_message.TargetID == WebHelper.GetLoggedUserId())
+                    {
+                        ModelOwner = true;
+                    }
+                }
+
+                break;
+            case (int)PushToPlay.Model.MessageSourceTypeEnum.Game:
+
+                _postedOnLinkCSS = PushToPlay.Helpers.NetHelper.GetCSSLinkGame(_message.TargetPlatformId.Value);
+                _postedOnLink = Html.PushToPlayActionGameHome(_message.TargetID.Value, _message.TargetGameName).ToString();
+                _postedOn = _message.TargetGameName;
+
+                break;
+            case (int)PushToPlay.Model.MessageSourceTypeEnum.Group:
+
+                _postedOnLinkCSS = classLinkText;
+                _postedOnLink = Url.RouteUrl(Constants.ROUTE_GROUP_HOME, new { id = _message.TargetID, name = WebHelper.ProcessUrlEnconding(_message.TargetGroupName) });
+                _postedOn = _message.TargetGroupName;
+
+                break;
+        }
+
+        _replyDivId = string.Concat("div", _message.Id.ToString());
+        _replyTextAreaId = string.Concat("area", _message.Id.ToString());
+        _replyCommentId = string.Concat("comment", _message.Id.ToString());
+
+        _postedMessage = ActivityMessage.GetMessage(_message, Model.PlatformId);
+    
+    
+    <div class="displayAreaColor @classFieldTextStrong" style="margin-bottom:10px;margin-left:@_marginLeft.ToString()px">
+        <div class="leftItem" style="padding-top: 7px; padding-left: 7px;">
+            <img src="@_imageName" width="60px" height="60px" />
+        </div>
+        <div class="leftItem" style="min-height:74px;width: @string.Concat((_size - _marginLeft).ToString(), "px"); vertical-align: top; padding-top: 5px; padding-left: 5px; padding-bottom: 5px; padding-right: 5px;">
+            <div class="leftItem"><a class="@classLinkText" href="@_postedLink"><small>@_postedName</small></a></div>
+            <div class="rightItem" style="text-align: right; margin-right: 0px;">
+                <small>comentou em <a href="@_postedOnLink"><small class="@_postedOnLinkCSS" style="text-decoration:underline">@_postedOn</small> </a>@WebHelper.GetTimeSince(_message.CreationDate)</small>
+                @if (ModelOwner)
+                {                             
+                    <i class="icon-cancel iconButtonCancelDisplayAreaColor" data-delete-id="@_message.Id.ToString()" style="margin-right: 0px; margin-left: 5px; cursor:pointer"></i>
+                }
+            </div>
+            <div class="clearBoth"></div>
+            <div style="margin-bottom: 5px; margin-top: 5px;">
+                @Html.Raw(_postedMessage)
+            </div>
+            @if (_message.ReplyToMessage == 0)
+            {
+                <div style="text-align: right;">
+                    <small id="@_replyCommentId" data-related="@_replyDivId" style="cursor:pointer" class="@classLinkText">comentar</small>
+                </div>
+                <div id="@_replyDivId" style="display:none;text-align:right">
+                    <div class="input-control textarea containerControl" style="padding-right: 5px; margin-bottom: 5px;">
+                        @Html.TextArea(_replyTextAreaId, new { @class = "normalTextArea", @style = "width:100%;" })
+                    </div>
+
+                    <button id="@_message.Id.ToString()" 
+                                data-reply-buttom="true" 
+                                data-uid="@WebHelper.GetLoggedUserId()"
+                                data-type="user"
+                                data-target-type="@_message.TargetType.Value"
+                                data-target-id="@_message.TargetID.Value"
+                                class="buttonOkNoMargin" 
+                                style="margin-right:0px" >
+                        Comentar</button>
+                </div>                
+            }
+        </div>
+    </div>         
+    }
+
+    <div style="text-align: center; margin-bottom: 10px;">
+        @Html.PushToPlayPager(Model.MessageList.TotalPages, Model.MessageList.CurrentPage)
+    </div>
+}
+
+
+

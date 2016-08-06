@@ -1,0 +1,69 @@
+﻿@using System.Web;
+@model PushToPlay.WEB.Models.UserHomeViewModel
+
+@{
+    Layout = "~/Views/Shared/User/_LayoutUserProfile.cshtml";
+}
+
+@section Content{
+
+    <div class="leftItem" style="margin-right: 7px; width: 630px; vertical-align: top">
+        @{Html.RenderPartial("MessengerView", Model.MessengerModel);}
+    </div>
+    <div class="leftItem" style="margin: 0px; width: 298px;">
+        <div class="displayAreaColor" style="width: 100%; margin-bottom: 10px;">
+            <div style="padding-top: 5px; padding-left: 5px; padding-bottom: 5px;">
+                <i class="icon-user fieldTextStrong"></i>
+                <span class="fieldTextStrong">Jogadores</span>
+            </div>
+            <div class="contentColor" style="height: 1px;"></div>
+            <div>
+                @{Html.RenderPartial("UserMiniView", Model.FriendList);}
+            </div>
+        </div>
+        <div class="displayAreaColor" style="width: 100%; margin-bottom: 10px;">
+            <div style="padding-top: 5px; padding-left: 5px; padding-bottom: 5px;">
+                <i class="icon-target-2 fieldTextStrong"></i>
+                <span class="fieldTextStrong">Jogos</span>
+            </div>
+            <div class="contentColor" style="height: 1px;"></div>
+            <div>
+                @{Html.RenderPartial("GameMiniView", Model.GameList);}
+            </div>
+        </div>
+        <div class="displayAreaColor" style="width: 100%; margin-bottom: 10px;">
+            <div style="padding-top: 5px; padding-left: 5px; padding-bottom: 5px;">
+                <i class="icon-cube-2 fieldTextStrong"></i>
+                <span class="fieldTextStrong">Grupos</span>
+            </div>
+            <div class="contentColor" style="height: 1px;"></div>
+            <div style="padding: 10px; padding-bottom: 7px;">
+            </div>
+        </div>
+        <div class="displayAreaColor" style="width: 100%; margin-bottom: 10px;">
+            <div style="padding-top: 5px; padding-left: 5px; padding-bottom: 5px;">
+                <i class="icon-cube fieldTextStrong"></i>
+                <span class="fieldTextStrong">Clans</span>
+            </div>
+            <div class="contentColor" style="height: 1px;"></div>
+            <div style="padding: 10px; padding-bottom: 7px;">
+            </div>
+        </div>
+        <div class="displayAreaColor" style="width: 100%; margin-bottom: 10px;">
+            <div style="padding-top: 5px; padding-left: 5px; padding-bottom: 5px;">
+                <i class="icon-calendar fieldTextStrong"></i>
+                <span class="fieldTextStrong">Eventos</span>
+            </div>
+            <div class="contentColor" style="height: 1px;"></div>
+            <div style="padding: 10px; padding-bottom: 7px;">
+            </div>
+        </div>
+    </div>
+    <div class="clearBoth"></div>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/Views/User/Home.js")
+    @Scripts.Render("~/Scripts/Views/Messenger/Messenger.js")
+}

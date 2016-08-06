@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{77842639-BF2F-41C8-84EF-6C2594E9B5DC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PushToPlay.Model</RootNamespace>
+    <AssemblyName>PushToPlay.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityMessage.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Event.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Game.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GameDetail.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Genre.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GiantBomb\GiantBombGameDetailResponse.cs" />
+    <Compile Include="GiantBomb\GiantBombGamesResponse.cs" />
+    <Compile Include="GiantBomb\GiantBombGenresResponse.cs" />
+    <Compile Include="GiantBomb\GiantBombPlatformEnum.cs" />
+    <Compile Include="GiantBomb\GiantBombPlatformResponse.cs" />
+    <Compile Include="GiantBomb\GiantBombReleasesResponse.cs" />
+    <Compile Include="Group.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\ListObject.cs" />
+    <Compile Include="LoL\Champion.cs" />
+    <Compile Include="LoL\Champion_Custom.cs" />
+    <Compile Include="LoL\Item.cs" />
+    <Compile Include="LoL\Item_Custom.cs" />
+    <Compile Include="LoL\Realm.cs" />
+    <Compile Include="LoL\Summoner.cs" />
+    <Compile Include="LoL\SummonerRecent.cs" />
+    <Compile Include="LoL\SummonerStats.cs" />
+    <Compile Include="Nuuvem\NuuvemGame.cs" />
+    <Compile Include="Platform.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PushToPlay\ActivityMessage.cs" />
+    <Compile Include="PushToPlay\ActivityMessageProcessed.cs" />
+    <Compile Include="PushToPlay\Event.cs" />
+    <Compile Include="PushToPlay\Game.cs" />
+    <Compile Include="PushToPlay\GameDetail.cs" />
+    <Compile Include="PushToPlay\Genre.cs" />
+    <Compile Include="PushToPlay\Group.cs" />
+    <Compile Include="PushToPlay\ModelBase.cs" />
+    <Compile Include="PushToPlay\Platform.cs" />
+    <Compile Include="PushToPlayModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PushToPlayModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PushToPlayModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PushToPlayModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PushToPlayModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="PushToPlay\RelationFriend.cs" />
+    <Compile Include="PushToPlay\SteamUser.cs" />
+    <Compile Include="PushToPlay\User.cs" />
+    <Compile Include="PushToPlay\UserGame.cs" />
+    <Compile Include="PushToPlay\UserGroup.cs" />
+    <Compile Include="RelationFriend.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SteamUser.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Steam\SteamAppAPI.cs" />
+    <Compile Include="Steam\SteamAppDetailAPI.cs" />
+    <Compile Include="Steam\SteamPlayerGames.cs" />
+    <Compile Include="Steam\SteamPlayerSummaryAPI.cs" />
+    <Compile Include="Steam\SteamPromotionsAPI.cs" />
+    <Compile Include="TwitchTv\TwitchStreamList.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserGame.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserGroups.cs">
+      <DependentUpon>PushToPlayModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="PushToPlayModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PushToPlayModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PushToPlayModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PushToPlayModel.edmx</DependentUpon>
+      <LastGenOutput>PushToPlayModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="PushToPlayModel.edmx.diagram">
+      <DependentUpon>PushToPlayModel.edmx</DependentUpon>
+    </None>
+    <None Include="PushToPlayModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PushToPlayModel.edmx</DependentUpon>
+      <LastGenOutput>PushToPlayModel.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PushToPlayModel.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PushToPlay.Helpers\PushToPlay.Helpers.csproj">
+      <Project>{a2bdc786-f676-4482-bcf8-a492ba4b47cc}</Project>
+      <Name>PushToPlay.Helpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

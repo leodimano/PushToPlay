@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PushToPlay.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="PushToPlayStoreContainer">
+    <EntitySet Name="EventSet" EntityType="PushToPlay.Store.EventSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GamePlatform" EntityType="PushToPlay.Store.GamePlatform" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GameSet" EntityType="PushToPlay.Store.GameSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupGame" EntityType="PushToPlay.Store.GroupGame" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupSet" EntityType="PushToPlay.Store.GroupSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GroupUser" EntityType="PushToPlay.Store.GroupUser" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MessageSet" EntityType="PushToPlay.Store.MessageSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PlatformSet" EntityType="PushToPlay.Store.PlatformSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SteamGameSet" EntityType="PushToPlay.Store.SteamGameSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SteamUserSet" EntityType="PushToPlay.Store.SteamUserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SteamUserSteamGame" EntityType="PushToPlay.Store.SteamUserSteamGame" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserGame" EntityType="PushToPlay.Store.UserGame" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserPlatform" EntityType="PushToPlay.Store.UserPlatform" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet" EntityType="PushToPlay.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_EventMessage" Association="PushToPlay.Store.FK_EventMessage">
+      <End Role="EventSet" EntitySet="EventSet" />
+      <End Role="MessageSet" EntitySet="MessageSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GameMessage" Association="PushToPlay.Store.FK_GameMessage">
+      <End Role="GameSet" EntitySet="GameSet" />
+      <End Role="MessageSet" EntitySet="MessageSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GamePlatform_Game" Association="PushToPlay.Store.FK_GamePlatform_Game">
+      <End Role="GameSet" EntitySet="GameSet" />
+      <End Role="GamePlatform" EntitySet="GamePlatform" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GamePlatform_Platform" Association="PushToPlay.Store.FK_GamePlatform_Platform">
+      <End Role="PlatformSet" EntitySet="PlatformSet" />
+      <End Role="GamePlatform" EntitySet="GamePlatform" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupEvent" Association="PushToPlay.Store.FK_GroupEvent">
+      <End Role="GroupSet" EntitySet="GroupSet" />
+      <End Role="EventSet" EntitySet="EventSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupGame_Game" Association="PushToPlay.Store.FK_GroupGame_Game">
+      <End Role="GameSet" EntitySet="GameSet" />
+      <End Role="GroupGame" EntitySet="GroupGame" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupGame_Group" Association="PushToPlay.Store.FK_GroupGame_Group">
+      <End Role="GroupSet" EntitySet="GroupSet" />
+      <End Role="GroupGame" EntitySet="GroupGame" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupMessage" Association="PushToPlay.Store.FK_GroupMessage">
+      <End Role="GroupSet" EntitySet="GroupSet" />
+      <End Role="MessageSet" EntitySet="MessageSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupUser_Group" Association="PushToPlay.Store.FK_GroupUser_Group">
+      <End Role="GroupSet" EntitySet="GroupSet" />
+      <End Role="GroupUser" EntitySet="GroupUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupUser_User" Association="PushToPlay.Store.FK_GroupUser_User">
+      <End Role="UserSet" EntitySet="UserSet" />
+      <End Role="GroupUser" EntitySet="GroupUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SteamGameGame" Association="PushToPlay.Store.FK_SteamGameGame">
+      <End Role="SteamGameSet" EntitySet="SteamGameSet" />
+      <End Role="GameSet" EntitySet="GameSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SteamUserSteamGame_SteamGame" Association="PushToPlay.Store.FK_SteamUserSteamGame_SteamGame">
+      <End Role="SteamGameSet" EntitySet="SteamGameSet" />
+      <End Role="SteamUserSteamGame" EntitySet="SteamUserSteamGame" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SteamUserSteamGame_SteamUser" Association="PushToPlay.Store.FK_SteamUserSteamGame_SteamUser">
+      <End Role="SteamUserSet" EntitySet="SteamUserSet" />
+      <End Role="SteamUserSteamGame" EntitySet="SteamUserSteamGame" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserEvent" Association="PushToPlay.Store.FK_UserEvent">
+      <End Role="UserSet" EntitySet="UserSet" />
+      <End Role="EventSet" EntitySet="EventSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserGame_Game" Association="PushToPlay.Store.FK_UserGame_Game">
+      <End Role="GameSet" EntitySet="GameSet" />
+      <End Role="UserGame" EntitySet="UserGame" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserGame_User" Association="PushToPlay.Store.FK_UserGame_User">
+      <End Role="UserSet" EntitySet="UserSet" />
+      <End Role="UserGame" EntitySet="UserGame" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMessage" Association="PushToPlay.Store.FK_UserMessage">
+      <End Role="UserSet" EntitySet="UserSet" />
+      <End Role="MessageSet" EntitySet="MessageSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPlatform_Platform" Association="PushToPlay.Store.FK_UserPlatform_Platform">
+      <End Role="PlatformSet" EntitySet="PlatformSet" />
+      <End Role="UserPlatform" EntitySet="UserPlatform" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPlatform_User" Association="PushToPlay.Store.FK_UserPlatform_User">
+      <End Role="UserSet" EntitySet="UserSet" />
+      <End Role="UserPlatform" EntitySet="UserPlatform" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSteamUser" Association="PushToPlay.Store.FK_UserSteamUser">
+      <End Role="UserSet" EntitySet="UserSet" />
+      <End Role="SteamUserSet" EntitySet="SteamUserSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="EventSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Group_Id" Type="int" />
+    <Property Name="User_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="GamePlatform">
+    <Key>
+      <PropertyRef Name="Game_Id" />
+      <PropertyRef Name="Platform_Id" />
+    </Key>
+    <Property Name="Game_Id" Type="int" Nullable="false" />
+    <Property Name="Platform_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GameSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Deck" Type="nvarchar(max)" />
+    <Property Name="GiantBombID" Type="bigint" Nullable="false" />
+    <Property Name="IconImageUrl" Type="nvarchar(max)" />
+    <Property Name="MediumImageUrl" Type="nvarchar(max)" />
+    <Property Name="Aliases" Type="nvarchar(max)" />
+    <Property Name="MetacriticScore" Type="nvarchar(max)" />
+    <Property Name="MetacriticUrl" Type="nvarchar(max)" />
+    <Property Name="SteamGame_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GroupGame">
+    <Key>
+      <PropertyRef Name="Group_Id" />
+      <PropertyRef Name="Game_Id" />
+    </Key>
+    <Property Name="Group_Id" Type="int" Nullable="false" />
+    <Property Name="Game_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GroupSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GroupUser">
+    <Key>
+      <PropertyRef Name="Group_Id" />
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="Group_Id" Type="int" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MessageSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MessageType" Type="int" Nullable="false" />
+    <Property Name="User_Id" Type="int" />
+    <Property Name="Game_Id" Type="int" />
+    <Property Name="Event_Id" Type="int" />
+    <Property Name="Group_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="PlatformSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Abbreviation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GiantBombID" Type="bigint" Nullable="false" />
+    <Property Name="MediumImageUrl" Type="nvarchar(max)" />
+    <Property Name="IconImageUrl" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="SteamGameSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SteamAppID" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SteamUserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SteamUserSteamGame">
+    <Key>
+      <PropertyRef Name="SteamUser_Id" />
+      <PropertyRef Name="SteamGame_Id" />
+    </Key>
+    <Property Name="SteamUser_Id" Type="int" Nullable="false" />
+    <Property Name="SteamGame_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserGame">
+    <Key>
+      <PropertyRef Name="User_Id" />
+      <PropertyRef Name="Game_Id" />
+    </Key>
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Game_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserPlatform">
+    <Key>
+      <PropertyRef Name="User_Id" />
+      <PropertyRef Name="Platform_Id" />
+    </Key>
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Platform_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_EventMessage">
+    <End Role="EventSet" Type="PushToPlay.Store.EventSet" Multiplicity="0..1" />
+    <End Role="MessageSet" Type="PushToPlay.Store.MessageSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MessageSet">
+        <PropertyRef Name="Event_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GameMessage">
+    <End Role="GameSet" Type="PushToPlay.Store.GameSet" Multiplicity="0..1" />
+    <End Role="MessageSet" Type="PushToPlay.Store.MessageSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GameSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MessageSet">
+        <PropertyRef Name="Game_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GamePlatform_Game">
+    <End Role="GameSet" Type="PushToPlay.Store.GameSet" Multiplicity="1" />
+    <End Role="GamePlatform" Type="PushToPlay.Store.GamePlatform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GameSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GamePlatform">
+        <PropertyRef Name="Game_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GamePlatform_Platform">
+    <End Role="PlatformSet" Type="PushToPlay.Store.PlatformSet" Multiplicity="1" />
+    <End Role="GamePlatform" Type="PushToPlay.Store.GamePlatform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlatformSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GamePlatform">
+        <PropertyRef Name="Platform_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupEvent">
+    <End Role="GroupSet" Type="PushToPlay.Store.GroupSet" Multiplicity="0..1" />
+    <End Role="EventSet" Type="PushToPlay.Store.EventSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventSet">
+        <PropertyRef Name="Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupGame_Game">
+    <End Role="GameSet" Type="PushToPlay.Store.GameSet" Multiplicity="1" />
+    <End Role="GroupGame" Type="PushToPlay.Store.GroupGame" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GameSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroupGame">
+        <PropertyRef Name="Game_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupGame_Group">
+    <End Role="GroupSet" Type="PushToPlay.Store.GroupSet" Multiplicity="1" />
+    <End Role="GroupGame" Type="PushToPlay.Store.GroupGame" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroupGame">
+        <PropertyRef Name="Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupMessage">
+    <End Role="GroupSet" Type="PushToPlay.Store.GroupSet" Multiplicity="0..1" />
+    <End Role="MessageSet" Type="PushToPlay.Store.MessageSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MessageSet">
+        <PropertyRef Name="Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupUser_Group">
+    <End Role="GroupSet" Type="PushToPlay.Store.GroupSet" Multiplicity="1" />
+    <End Role="GroupUser" Type="PushToPlay.Store.GroupUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroupUser">
+        <PropertyRef Name="Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupUser_User">
+    <End Role="UserSet" Type="PushToPlay.Store.UserSet" Multiplicity="1" />
+    <End Role="GroupUser" Type="PushToPlay.Store.GroupUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroupUser">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SteamGameGame">
+    <End Role="SteamGameSet" Type="PushToPlay.Store.SteamGameSet" Multiplicity="1" />
+    <End Role="GameSet" Type="PushToPlay.Store.GameSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SteamGameSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GameSet">
+        <PropertyRef Name="SteamGame_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SteamUserSteamGame_SteamGame">
+    <End Role="SteamGameSet" Type="PushToPlay.Store.SteamGameSet" Multiplicity="1" />
+    <End Role="SteamUserSteamGame" Type="PushToPlay.Store.SteamUserSteamGame" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SteamGameSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SteamUserSteamGame">
+        <PropertyRef Name="SteamGame_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SteamUserSteamGame_SteamUser">
+    <End Role="SteamUserSet" Type="PushToPlay.Store.SteamUserSet" Multiplicity="1" />
+    <End Role="SteamUserSteamGame" Type="PushToPlay.Store.SteamUserSteamGame" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SteamUserSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SteamUserSteamGame">
+        <PropertyRef Name="SteamUser_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserEvent">
+    <End Role="UserSet" Type="PushToPlay.Store.UserSet" Multiplicity="0..1" />
+    <End Role="EventSet" Type="PushToPlay.Store.EventSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventSet">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserGame_Game">
+    <End Role="GameSet" Type="PushToPlay.Store.GameSet" Multiplicity="1" />
+    <End Role="UserGame" Type="PushToPlay.Store.UserGame" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GameSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserGame">
+        <PropertyRef Name="Game_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserGame_User">
+    <End Role="UserSet" Type="PushToPlay.Store.UserSet" Multiplicity="1" />
+    <End Role="UserGame" Type="PushToPlay.Store.UserGame" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserGame">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMessage">
+    <End Role="UserSet" Type="PushToPlay.Store.UserSet" Multiplicity="0..1" />
+    <End Role="MessageSet" Type="PushToPlay.Store.MessageSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MessageSet">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPlatform_Platform">
+    <End Role="PlatformSet" Type="PushToPlay.Store.PlatformSet" Multiplicity="1" />
+    <End Role="UserPlatform" Type="PushToPlay.Store.UserPlatform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlatformSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPlatform">
+        <PropertyRef Name="Platform_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPlatform_User">
+    <End Role="UserSet" Type="PushToPlay.Store.UserSet" Multiplicity="1" />
+    <End Role="UserPlatform" Type="PushToPlay.Store.UserPlatform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPlatform">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSteamUser">
+    <End Role="UserSet" Type="PushToPlay.Store.UserSet" Multiplicity="1" />
+    <End Role="SteamUserSet" Type="PushToPlay.Store.SteamUserSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SteamUserSet">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,52 @@
+﻿@model PushToPlay.WEB.Models.UserSearchViewModel
+
+@{
+    ViewBag.Title = "Push To Play - Jogadores";
+    Layout = "~/Views/Shared/_LayoutSide.cshtml";
+}
+
+
+@section SectionSideBar{
+    <div class="displayAreaColor" style="padding-top: 5px; padding-bottom: 2px; padding-left: 10px;">
+        <div class="leftItem" style="padding-top: 3px; padding-bottom: 5px;">
+            <span class="fieldTextStrong">Buscar por</span>
+            <span class="fieldText">Jogadores</span>
+        </div>
+        <div class="leftItem" style="padding-top: 3px; padding-bottom: 5px; margin-left: 5px;">
+            @Html.TextBox("txtSearch", string.Empty, new { @class = "normalTextBox" })
+        </div>
+        <div class="leftItem" style="padding-top: 3px; padding-bottom: 5px; margin-left: 5px; vertical-align: top;">
+            <button id="btnSearch" class="buttonSearch">Buscar</button>
+        </div>
+    </div>
+}
+
+@section SectionContent{
+
+    <div id="SearchContent">
+
+        @if (Model.ObjectCount > 0)
+        {
+            foreach (var _compactView in Model.ListUserCompactViewModel)
+            {
+            <div id="@_compactView.AjaxDivContent" class="leftItem">
+                @{Html.RenderPartial("UserCompactView", _compactView);}
+            </div>
+            }
+
+            if (Model.TotalPage > 1)
+            {
+            <div style="text-align: center;">
+                @Html.PushToPlayPager(Model.TotalPage, Model.CurrentPage)
+            </div>            
+            }
+        }
+
+    </div>
+
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/Views/User/Search.js")
+}
+

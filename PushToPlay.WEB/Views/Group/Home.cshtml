@@ -1,0 +1,54 @@
+﻿@using PushToPlay.WEB;
+@model PushToPlay.WEB.Models.GroupHomeViewModel
+
+@{
+    ViewBag.Title = string.Concat("Push To Play - ", Model.GroupName);
+    Layout = "~/Views/Shared/Group/_LayoutGroupProfile.cshtml";
+
+    var classFieldText = "fieldText";
+    var classFieldTextStrong = "fieldTextStrong";
+    
+}
+
+@section content{
+
+    <div class="leftItem" style="margin-right: 7px; width: 630px; vertical-align: top">
+        @{Html.RenderPartial("MessengerView", Model.MessengerModel);}
+    </div>
+    <div class="leftItem" style="margin: 0px; width: 298px;">
+        <div class="displayAreaColor" style="width: 100%; margin-bottom: 10px;">
+            <div style="padding-top: 5px; padding-left: 5px; padding-bottom: 5px;">
+                <i class="icon-user @classFieldTextStrong"></i>
+                <span class="@classFieldTextStrong">Jogadores</span>
+            </div>
+            <div class="contentColor" style="height: 1px;"></div>
+            <div style="padding: 10px; padding-bottom: 7px;">
+                @*@{Html.RenderPartial("UserMiniView");}*@
+            </div>
+        </div>
+        <div class="displayAreaColor" style="width: 100%; margin-bottom: 10px;">
+            <div style="padding-top: 5px; padding-left: 5px; padding-bottom: 5px;">
+                <i class="icon-target-2 @classFieldTextStrong"></i>
+                <span class="@classFieldTextStrong">Jogos</span>
+            </div>
+            <div class="contentColor" style="height: 1px;"></div>
+            <div style="padding: 10px; padding-bottom: 7px;">
+            </div>
+        </div>
+        <div class="displayAreaColor" style="width: 100%; margin-bottom: 10px;">
+            <div style="padding-top: 5px; padding-left: 5px; padding-bottom: 5px;">
+                <i class="icon-calendar @classFieldTextStrong"></i>
+                <span class="@classFieldTextStrong">Eventos</span>
+            </div>
+            <div class="contentColor" style="height: 1px;"></div>
+            <div style="padding: 10px; padding-bottom: 7px;">
+            </div>
+        </div>
+    </div>
+    <div class="clearBoth"></div>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/Views/Messenger/Messenger.js")
+}

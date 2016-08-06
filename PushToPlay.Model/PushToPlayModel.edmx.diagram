@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="98205d4f25c9422fa0f7a4911879fd3b" Name="Push2PlayDiagram" ZoomLevel="88">
+        <EntityTypeShape EntityType="PushToPlayModel.Event" Width="1.5" PointX="13.875" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PushToPlayModel.Game" Width="1.5" PointX="3.125" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PushToPlayModel.Group" Width="1.5" PointX="8.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PushToPlayModel.Platform" Width="1.5" PointX="0.875" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PushToPlayModel.SteamUser" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PushToPlayModel.User" Width="1.5" PointX="10" PointY="12" IsExpanded="true" />
+        <AssociationConnector Association="PushToPlayModel.FK_UserEvent" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PushToPlayModel.GameDetail" Width="1.5" PointX="5.375" PointY="6.375" />
+        <EntityTypeShape EntityType="PushToPlayModel.Genre" Width="1.5" PointX="0.5" PointY="6.125" />
+        <AssociationConnector Association="PushToPlayModel.GameGameDetail" />
+        <AssociationConnector Association="PushToPlayModel.GameDetailPlatform" />
+        <AssociationConnector Association="PushToPlayModel.GameGenre" />
+        <EntityTypeShape EntityType="PushToPlayModel.UserGame" Width="1.5" PointX="5.5" PointY="12.875" />
+        <AssociationConnector Association="PushToPlayModel.UserUserGame" />
+        <AssociationConnector Association="PushToPlayModel.GameUserGame" />
+        <AssociationConnector Association="PushToPlayModel.FK_GameDetailUserGame" />
+        <EntityTypeShape EntityType="PushToPlayModel.RelationFriend" Width="1.5" PointX="13" PointY="14.375" />
+        <AssociationConnector Association="PushToPlayModel.FK_RelationFriendUser" />
+        <AssociationConnector Association="PushToPlayModel.FK_RelationFriendUser1" />
+        <EntityTypeShape EntityType="PushToPlayModel.ActivityMessage" Width="1.5" PointX="11.375" PointY="6" />
+        <AssociationConnector Association="PushToPlayModel.FK_GroupEvent" />
+        <EntityTypeShape EntityType="PushToPlayModel.UserGroups" Width="1.5" PointX="7.5" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="PushToPlayModel.FK_GroupUserGroups" />
+        <AssociationConnector Association="PushToPlayModel.FK_UserUserGroup" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

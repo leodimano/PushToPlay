@@ -1,0 +1,32 @@
+﻿@using PushToPlay.WEB;
+@using PushToPlay.Model;
+@using PushToPlay.WEB.Helper;
+@using PushToPlay.WEB.Models;
+@model PushToPlay.WEB.Models.FriendViewModel
+
+@{
+    var _contextUser = Model.CurrentUser;
+    Layout = "~/Views/Shared/User/_LayoutUserProfile.cshtml";
+}
+
+@section Content{
+
+    <div id="SearchContent">
+        @if (Model.ObjectCount > 0)
+        {
+            foreach (var _compactView in Model.ListUserCompactViewModel)
+            {
+            <div id="@_compactView.AjaxDivContent" class="leftItem">
+                @{Html.RenderPartial("UserCompactView", _compactView);}
+            </div>
+            }
+
+            if (Model.TotalPage > 1)
+            {
+            <div style="text-align: center;">
+                @Html.PushToPlayPager(Model.TotalPage, Model.CurrentPage)
+            </div>            
+            }
+        }
+    </div>
+}

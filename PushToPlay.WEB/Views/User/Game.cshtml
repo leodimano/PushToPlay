@@ -1,0 +1,35 @@
+﻿@using PushToPlay.WEB.Models;
+@using PushToPlay.WEB;
+
+@model UserGameListViewModel
+
+@{
+    Layout = "~/Views/Shared/User/_LayoutUserProfile.cshtml";
+}
+
+@section Content{
+
+    <div id="SearchContent">
+
+        @if (Model.ObjectCount > 0)
+        {
+            foreach (var _compactView in Model.ListGameCompactViewModel)
+            {
+            <div id="@_compactView.AjaxDivContent" class="leftItem">
+                @{Html.RenderPartial("GameCompactView", _compactView);}
+            </div>
+            }
+
+            if (Model.TotalPage > 1)
+            {
+            <div style="text-align: center;">
+                @Html.PushToPlayPager(Model.TotalPage, Model.CurrentPage)
+            </div>            
+            }
+
+        }
+
+    </div>
+
+
+}

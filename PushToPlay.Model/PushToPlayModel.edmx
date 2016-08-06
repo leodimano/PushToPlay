@@ -1,0 +1,966 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PushToPlayModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="PushToPlayModelStoreContainer">
+    <EntitySet Name="Events" EntityType="PushToPlayModel.Store.Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Games" EntityType="PushToPlayModel.Store.Games" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Groups" EntityType="PushToPlayModel.Store.Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Platforms" EntityType="PushToPlayModel.Store.Platforms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SteamUsers" EntityType="PushToPlayModel.Store.SteamUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="PushToPlayModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GameDetails" EntityType="PushToPlayModel.Store.GameDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Genres" EntityType="PushToPlayModel.Store.Genres" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserGames" EntityType="PushToPlayModel.Store.UserGames" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RelationFriends" EntityType="PushToPlayModel.Store.RelationFriends" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ActivityMessages" EntityType="PushToPlayModel.Store.ActivityMessages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserGroups" EntityType="PushToPlayModel.Store.UserGroups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GameGenre" EntityType="PushToPlayModel.Store.GameGenre" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_UserEvent" Association="PushToPlayModel.Store.FK_UserEvent">
+      <End Role="UserSet" EntitySet="Users" />
+      <End Role="EventSet" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="GameGameDetail" Association="PushToPlayModel.Store.GameGameDetail">
+      <End Role="Game" EntitySet="Games" />
+      <End Role="GameDetail" EntitySet="GameDetails" />
+    </AssociationSet>
+    <AssociationSet Name="GameDetailPlatform" Association="PushToPlayModel.Store.GameDetailPlatform">
+      <End Role="GameDetail" EntitySet="GameDetails" />
+      <End Role="Platform" EntitySet="Platforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GameGenre_Game" Association="PushToPlayModel.Store.FK_GameGenre_Game">
+      <End Role="Game" EntitySet="Games" />
+      <End Role="GameGenre" EntitySet="GameGenre" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GameGenre_Genre" Association="PushToPlayModel.Store.FK_GameGenre_Genre">
+      <End Role="Genre" EntitySet="Genres" />
+      <End Role="GameGenre" EntitySet="GameGenre" />
+    </AssociationSet>
+    <AssociationSet Name="UserUserGame" Association="PushToPlayModel.Store.UserUserGame">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserGame" EntitySet="UserGames" />
+    </AssociationSet>
+    <AssociationSet Name="GameUserGame" Association="PushToPlayModel.Store.GameUserGame">
+      <End Role="Game" EntitySet="Games" />
+      <End Role="UserGame" EntitySet="UserGames" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GameDetailUserGame" Association="PushToPlayModel.Store.FK_GameDetailUserGame">
+      <End Role="GameDetail" EntitySet="GameDetails" />
+      <End Role="UserGame" EntitySet="UserGames" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RelationFriendUser" Association="PushToPlayModel.Store.FK_RelationFriendUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="RelationFriend1" EntitySet="RelationFriends" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RelationFriendUser1" Association="PushToPlayModel.Store.FK_RelationFriendUser1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="RelationFriend1" EntitySet="RelationFriends" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupEvent" Association="PushToPlayModel.Store.FK_GroupEvent">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupUserGroups" Association="PushToPlayModel.Store.FK_GroupUserGroups">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="UserGroups" EntitySet="UserGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserUserGroup" Association="PushToPlayModel.Store.FK_UserUserGroup">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserGroups" EntitySet="UserGroups" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Group_Id" Type="int" Nullable="true" />
+    <Property Name="User_Id" Type="int" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Games">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="GiantBombID" Type="bigint" Nullable="false" />
+    <Property Name="Aliases" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="MetacriticScore" Type="int" Nullable="true" />
+    <Property Name="MetacriticUrl" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Developer" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Publisher" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SteamAppId" Type="int" Nullable="true" />
+    <Property Name="SteamAppUrl" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupType" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Platforms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Abbreviation" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="GiantBombID" Type="bigint" Nullable="false" />
+    <Property Name="PlatformImage" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IconImage" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SteamUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastLogon" Type="datetime" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PsnId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="OriginId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="GamerTag" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SkynerdId" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="GameDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GameId" Type="int" Nullable="false" />
+    <Property Name="PlatformId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IconImage" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="GameImage" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ReleaseDate" Type="datetime" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Genres">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="GiantBombId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserGames">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="GameId" Type="int" Nullable="false" />
+    <Property Name="GameDetailId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RelationFriends">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="UserTargetId" Type="int" Nullable="false" />
+    <Property Name="UserBaseId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActivityMessages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BaseId" Type="int" Nullable="true" />
+    <Property Name="BaseType" Type="int" Nullable="true" />
+    <Property Name="TargetID" Type="int" Nullable="true" />
+    <Property Name="TargetType" Type="int" Nullable="true" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="MessageType" Type="int" Nullable="true" />
+    <Property Name="MessageAction" Type="int" Nullable="true" />
+    <Property Name="ReplyToMessage" Type="int" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserGroups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GameGenre">
+    <Key>
+      <PropertyRef Name="Games_Id" />
+      <PropertyRef Name="Genres_Id" />
+    </Key>
+    <Property Name="Games_Id" Type="int" Nullable="false" />
+    <Property Name="Genres_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_UserEvent">
+    <End Role="UserSet" Type="PushToPlayModel.Store.Users" Multiplicity="0..1" />
+    <End Role="EventSet" Type="PushToPlayModel.Store.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventSet">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GameGameDetail">
+    <End Role="Game" Type="PushToPlayModel.Store.Games" Multiplicity="1" />
+    <End Role="GameDetail" Type="PushToPlayModel.Store.GameDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GameDetail">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GameDetailPlatform">
+    <End Role="GameDetail" Type="PushToPlayModel.Store.GameDetails" Multiplicity="*" />
+    <End Role="Platform" Type="PushToPlayModel.Store.Platforms" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Platform">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GameDetail">
+        <PropertyRef Name="PlatformId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserUserGame">
+    <End Role="User" Type="PushToPlayModel.Store.Users" Multiplicity="1" />
+    <End Role="UserGame" Type="PushToPlayModel.Store.UserGames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserGame">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GameUserGame">
+    <End Role="Game" Type="PushToPlayModel.Store.Games" Multiplicity="1" />
+    <End Role="UserGame" Type="PushToPlayModel.Store.UserGames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserGame">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GameDetailUserGame">
+    <End Role="GameDetail" Type="PushToPlayModel.Store.GameDetails" Multiplicity="1" />
+    <End Role="UserGame" Type="PushToPlayModel.Store.UserGames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GameDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserGame">
+        <PropertyRef Name="GameDetailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RelationFriendUser">
+    <End Role="User" Type="PushToPlayModel.Store.Users" Multiplicity="1" />
+    <End Role="RelationFriend1" Type="PushToPlayModel.Store.RelationFriends" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RelationFriend1">
+        <PropertyRef Name="UserTargetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RelationFriendUser1">
+    <End Role="User" Type="PushToPlayModel.Store.Users" Multiplicity="1" />
+    <End Role="RelationFriend1" Type="PushToPlayModel.Store.RelationFriends" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RelationFriend1">
+        <PropertyRef Name="UserBaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupEvent">
+    <End Role="Group" Type="PushToPlayModel.Store.Groups" Multiplicity="0..1" />
+    <End Role="Event" Type="PushToPlayModel.Store.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupUserGroups">
+    <End Role="Group" Type="PushToPlayModel.Store.Groups" Multiplicity="1" />
+    <End Role="UserGroups" Type="PushToPlayModel.Store.UserGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserGroups">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserUserGroup">
+    <End Role="User" Type="PushToPlayModel.Store.Users" Multiplicity="1" />
+    <End Role="UserGroups" Type="PushToPlayModel.Store.UserGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserGroups">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GameGenre_Game">
+    <End Role="Game" Type="PushToPlayModel.Store.Games" Multiplicity="1" />
+    <End Role="GameGenre" Type="PushToPlayModel.Store.GameGenre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GameGenre">
+        <PropertyRef Name="Games_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GameGenre_Genre">
+    <End Role="GameGenre" Type="PushToPlayModel.Store.GameGenre" Multiplicity="*" />
+    <End Role="Genre" Type="PushToPlayModel.Store.Genres" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GameGenre">
+        <PropertyRef Name="Genres_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PushToPlayModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PushToPlayContext" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="PushToPlayModel.Event" />
+          <EntitySet Name="Games" EntityType="PushToPlayModel.Game" />
+          <EntitySet Name="Groups" EntityType="PushToPlayModel.Group" />
+          <EntitySet Name="Platforms" EntityType="PushToPlayModel.Platform" />
+          <EntitySet Name="SteamUsers" EntityType="PushToPlayModel.SteamUser" />
+          <EntitySet Name="Users" EntityType="PushToPlayModel.User" />
+          <AssociationSet Name="FK_UserEvent" Association="PushToPlayModel.FK_UserEvent">
+            <End Role="UserSet" EntitySet="Users" />
+            <End Role="EventSet" EntitySet="Events" />
+          </AssociationSet>
+          <EntitySet Name="GameDetails" EntityType="PushToPlayModel.GameDetail" />
+          <EntitySet Name="Genres" EntityType="PushToPlayModel.Genre" />
+          <AssociationSet Name="GameGameDetail" Association="PushToPlayModel.GameGameDetail">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="GameDetail" EntitySet="GameDetails" />
+          </AssociationSet>
+          <AssociationSet Name="GameDetailPlatform" Association="PushToPlayModel.GameDetailPlatform">
+            <End Role="GameDetail" EntitySet="GameDetails" />
+            <End Role="Platform" EntitySet="Platforms" />
+          </AssociationSet>
+          <AssociationSet Name="GameGenre" Association="PushToPlayModel.GameGenre">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="Genre" EntitySet="Genres" />
+          </AssociationSet>
+          <EntitySet Name="UserGames" EntityType="PushToPlayModel.UserGame" />
+          <AssociationSet Name="UserUserGame" Association="PushToPlayModel.UserUserGame">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserGame" EntitySet="UserGames" />
+          </AssociationSet>
+          <AssociationSet Name="GameUserGame" Association="PushToPlayModel.GameUserGame">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="UserGame" EntitySet="UserGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GameDetailUserGame" Association="PushToPlayModel.FK_GameDetailUserGame">
+            <End Role="GameDetail" EntitySet="GameDetails" />
+            <End Role="UserGame" EntitySet="UserGames" />
+          </AssociationSet>
+          <EntitySet Name="RelationFriends" EntityType="PushToPlayModel.RelationFriend" />
+          <AssociationSet Name="FK_RelationFriendUser" Association="PushToPlayModel.FK_RelationFriendUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="RelationFriend1" EntitySet="RelationFriends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RelationFriendUser1" Association="PushToPlayModel.FK_RelationFriendUser1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="RelationFriend1" EntitySet="RelationFriends" />
+          </AssociationSet>
+          <EntitySet Name="ActivityMessages" EntityType="PushToPlayModel.ActivityMessage" />
+          <AssociationSet Name="FK_GroupEvent" Association="PushToPlayModel.FK_GroupEvent">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <EntitySet Name="UserGroups" EntityType="PushToPlayModel.UserGroups" />
+          <AssociationSet Name="FK_GroupUserGroups" Association="PushToPlayModel.FK_GroupUserGroups">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="UserGroups" EntitySet="UserGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserUserGroup" Association="PushToPlayModel.FK_UserUserGroup">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserGroups" EntitySet="UserGroups" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_Id" Type="Int32" />
+          <Property Name="User_Id" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="PushToPlayModel.FK_UserEvent" FromRole="EventSet" ToRole="UserSet" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Group" Relationship="PushToPlayModel.FK_GroupEvent" FromRole="Event" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GiantBombID" Type="Int64" Nullable="false" />
+          <Property Name="Aliases" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="MetacriticScore" Type="Int32" />
+          <Property Name="MetacriticUrl" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Developer" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Publisher" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="GameDetails" Relationship="PushToPlayModel.GameGameDetail" FromRole="Game" ToRole="GameDetail" />
+          <NavigationProperty Name="Genres" Relationship="PushToPlayModel.GameGenre" FromRole="Game" ToRole="Genre" />
+          <Property Type="Int32" Name="SteamAppId" />
+          <Property Type="String" Name="SteamAppUrl" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserGames" Relationship="PushToPlayModel.GameUserGame" FromRole="Game" ToRole="UserGame" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupType" Type="Int32" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Events" Relationship="PushToPlayModel.FK_GroupEvent" FromRole="Group" ToRole="Event" />
+          <NavigationProperty Name="UserGroups" Relationship="PushToPlayModel.FK_GroupUserGroups" FromRole="Group" ToRole="UserGroups" />
+        </EntityType>
+        <EntityType Name="Platform">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
+          <Property Name="Abbreviation" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GiantBombID" Type="Int64" Nullable="false" />
+          <Property Name="PlatformImage" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
+          <Property Name="IconImage" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="GameDetails" Relationship="PushToPlayModel.GameDetailPlatform" FromRole="Platform" ToRole="GameDetail" />
+        </EntityType>
+        <EntityType Name="SteamUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Events" Relationship="PushToPlayModel.FK_UserEvent" FromRole="UserSet" ToRole="EventSet" />
+          <Property Type="DateTime" Name="LastLogon" Precision="3" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="PsnId" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="OriginId" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="GamerTag" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="SkynerdId" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="UserGames" Relationship="PushToPlayModel.UserUserGame" FromRole="User" ToRole="UserGame" />
+          <NavigationProperty Name="RelationFriends" Relationship="PushToPlayModel.FK_RelationFriendUser" FromRole="User" ToRole="RelationFriend1" />
+          <NavigationProperty Name="RelationFriends1" Relationship="PushToPlayModel.FK_RelationFriendUser1" FromRole="User" ToRole="RelationFriend1" />
+          <NavigationProperty Name="UserGroups" Relationship="PushToPlayModel.FK_UserUserGroup" FromRole="User" ToRole="UserGroups" />
+        </EntityType>
+        <Association Name="FK_UserEvent">
+          <End Role="UserSet" Type="PushToPlayModel.User" Multiplicity="0..1" />
+          <End Role="EventSet" Type="PushToPlayModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventSet">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GameDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Game" Relationship="PushToPlayModel.GameGameDetail" FromRole="GameDetail" ToRole="Game" />
+          <Property Type="Int32" Name="GameId" Nullable="false" />
+          <NavigationProperty Name="Platform" Relationship="PushToPlayModel.GameDetailPlatform" FromRole="GameDetail" ToRole="Platform" />
+          <Property Type="Int32" Name="PlatformId" Nullable="false" />
+          <Property Type="String" Name="Price" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="IconImage" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="GameImage" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="DateTime" Name="ReleaseDate" Nullable="true" Precision="3" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserGames" Relationship="PushToPlayModel.FK_GameDetailUserGame" FromRole="GameDetail" ToRole="UserGame" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="ModifiedDate" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Games" Relationship="PushToPlayModel.GameGenre" FromRole="Genre" ToRole="Game" />
+          <Property Type="Int64" Name="GiantBombId" Nullable="false" />
+        </EntityType>
+        <Association Name="GameGameDetail">
+          <End Type="PushToPlayModel.Game" Role="Game" Multiplicity="1" />
+          <End Type="PushToPlayModel.GameDetail" Role="GameDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GameDetail">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GameDetailPlatform">
+          <End Type="PushToPlayModel.GameDetail" Role="GameDetail" Multiplicity="*" />
+          <End Type="PushToPlayModel.Platform" Role="Platform" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Platform">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GameDetail">
+              <PropertyRef Name="PlatformId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GameGenre">
+          <End Type="PushToPlayModel.Game" Role="Game" Multiplicity="*" />
+          <End Type="PushToPlayModel.Genre" Role="Genre" Multiplicity="*" />
+        </Association>
+        <EntityType Name="UserGame">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User" Relationship="PushToPlayModel.UserUserGame" FromRole="UserGame" ToRole="User" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <NavigationProperty Name="Game" Relationship="PushToPlayModel.GameUserGame" FromRole="UserGame" ToRole="Game" />
+          <Property Type="Int32" Name="GameId" Nullable="false" />
+          <Property Type="Int32" Name="GameDetailId" Nullable="false" />
+          <NavigationProperty Name="GameDetail" Relationship="PushToPlayModel.FK_GameDetailUserGame" FromRole="UserGame" ToRole="GameDetail" />
+        </EntityType>
+        <Association Name="UserUserGame">
+          <End Type="PushToPlayModel.User" Role="User" Multiplicity="1" />
+          <End Type="PushToPlayModel.UserGame" Role="UserGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGame">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GameUserGame">
+          <End Type="PushToPlayModel.Game" Role="Game" Multiplicity="1" />
+          <End Type="PushToPlayModel.UserGame" Role="UserGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGame">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GameDetailUserGame">
+          <End Type="PushToPlayModel.GameDetail" Role="GameDetail" Multiplicity="1" />
+          <End Type="PushToPlayModel.UserGame" Role="UserGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGame">
+              <PropertyRef Name="GameDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RelationFriend">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <Property Type="Int32" Name="UserTargetId" Nullable="false" />
+          <Property Type="Int32" Name="UserBaseId" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="PushToPlayModel.FK_RelationFriendUser" FromRole="RelationFriend1" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="PushToPlayModel.FK_RelationFriendUser1" FromRole="RelationFriend1" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_RelationFriendUser">
+          <End Type="PushToPlayModel.User" Role="User" Multiplicity="1" />
+          <End Type="PushToPlayModel.RelationFriend" Role="RelationFriend1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RelationFriend1">
+              <PropertyRef Name="UserTargetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RelationFriendUser1">
+          <End Type="PushToPlayModel.User" Role="User" Multiplicity="1" />
+          <End Type="PushToPlayModel.RelationFriend" Role="RelationFriend1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RelationFriend1">
+              <PropertyRef Name="UserBaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ActivityMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BaseId" />
+          <Property Type="Int32" Name="BaseType" />
+          <Property Type="Int32" Name="TargetID" />
+          <Property Type="Int32" Name="TargetType" />
+          <Property Type="String" Name="Message" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="MessageType" />
+          <Property Type="Int32" Name="MessageAction" />
+          <Property Type="Int32" Name="ReplyToMessage" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_GroupEvent">
+          <End Type="PushToPlayModel.Group" Role="Group" Multiplicity="0..1" />
+          <End Type="PushToPlayModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="GroupId" Nullable="false" />
+          <Property Type="Int32" Name="Status" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Groups" Relationship="PushToPlayModel.FK_GroupUserGroups" FromRole="UserGroups" ToRole="Group" />
+          <NavigationProperty Name="Users" Relationship="PushToPlayModel.FK_UserUserGroup" FromRole="UserGroups" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_GroupUserGroups">
+          <End Type="PushToPlayModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="PushToPlayModel.UserGroups" Role="UserGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroups">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserUserGroup">
+          <End Type="PushToPlayModel.User" Role="User" Multiplicity="1" />
+          <End Type="PushToPlayModel.UserGroups" Role="UserGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroups">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PushToPlayModelStoreContainer" CdmEntityContainer="PushToPlayContext">
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.Event)">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Games">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.Game)">
+        <MappingFragment StoreEntitySet="Games">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="GiantBombID" ColumnName="GiantBombID" />
+          <ScalarProperty Name="Aliases" ColumnName="Aliases" />
+          <ScalarProperty Name="MetacriticScore" ColumnName="MetacriticScore" />
+          <ScalarProperty Name="MetacriticUrl" ColumnName="MetacriticUrl" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Developer" ColumnName="Developer" />
+          <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+          <ScalarProperty Name="SteamAppId" ColumnName="SteamAppId" />
+          <ScalarProperty Name="SteamAppUrl" ColumnName="SteamAppUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.Group)">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Platforms">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.Platform)">
+        <MappingFragment StoreEntitySet="Platforms">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+          <ScalarProperty Name="GiantBombID" ColumnName="GiantBombID" />
+          <ScalarProperty Name="PlatformImage" ColumnName="PlatformImage" />
+          <ScalarProperty Name="IconImage" ColumnName="IconImage" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SteamUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.SteamUser)">
+        <MappingFragment StoreEntitySet="SteamUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastLogon" ColumnName="LastLogon" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PsnId" ColumnName="PsnId" />
+          <ScalarProperty Name="OriginId" ColumnName="OriginId" />
+          <ScalarProperty Name="GamerTag" ColumnName="GamerTag" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SkynerdId" ColumnName="SkynerdId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GameDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.GameDetail)">
+        <MappingFragment StoreEntitySet="GameDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GameId" ColumnName="GameId" />
+          <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="IconImage" ColumnName="IconImage" />
+          <ScalarProperty Name="GameImage" ColumnName="GameImage" />
+          <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genres">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.Genre)">
+        <MappingFragment StoreEntitySet="Genres">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="GiantBombId" ColumnName="GiantBombId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserGames">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.UserGame)">
+        <MappingFragment StoreEntitySet="UserGames">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GameId" ColumnName="GameId" />
+          <ScalarProperty Name="GameDetailId" ColumnName="GameDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RelationFriends">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.RelationFriend)">
+        <MappingFragment StoreEntitySet="RelationFriends">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="UserTargetId" ColumnName="UserTargetId" />
+          <ScalarProperty Name="UserBaseId" ColumnName="UserBaseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActivityMessages">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.ActivityMessage)">
+        <MappingFragment StoreEntitySet="ActivityMessages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BaseId" ColumnName="BaseId" />
+          <ScalarProperty Name="BaseType" ColumnName="BaseType" />
+          <ScalarProperty Name="TargetID" ColumnName="TargetID" />
+          <ScalarProperty Name="TargetType" ColumnName="TargetType" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+          <ScalarProperty Name="MessageAction" ColumnName="MessageAction" />
+          <ScalarProperty Name="ReplyToMessage" ColumnName="ReplyToMessage" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserGroups">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlayModel.UserGroups)">
+        <MappingFragment StoreEntitySet="UserGroups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="GameGenre" TypeName="PushToPlayModel.GameGenre" StoreEntitySet="GameGenre">
+      <EndProperty Name="Game">
+        <ScalarProperty Name="Id" ColumnName="Games_Id" />
+      </EndProperty>
+      <EndProperty Name="Genre">
+        <ScalarProperty Name="Id" ColumnName="Genres_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

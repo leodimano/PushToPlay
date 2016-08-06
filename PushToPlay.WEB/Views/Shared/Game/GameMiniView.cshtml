@@ -1,0 +1,15 @@
+﻿@using PushToPlay.WEB.Models;
+
+@model IEnumerable<GameCompactViewModel>
+
+<div style="padding-top: 3px; padding-left: 10px; padding-bottom: 7px;">
+    @foreach (var _gameCompactViewModel in Model)
+    {
+        <div style="float: left; margin-right: 10px; margin-top: 7px;">
+            <a href="@Html.PushToPlayActionGameHome(_gameCompactViewModel.GameDetailId, _gameCompactViewModel.Name)">
+                <img src="@_gameCompactViewModel.GameImagePath" style="height:55px;width:38px;"/>
+            </a>
+        </div>
+    }
+    <div class="clearBoth"></div>
+</div>

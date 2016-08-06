@@ -1,0 +1,206 @@
+﻿@using PushToPlay.WEB;
+@using PushToPlay.Model;
+
+@model PushToPlay.WEB.Models.PushToPlayBaseViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string _name = (string.IsNullOrWhiteSpace(Model.CurrentUser.Name) ? Model.CurrentUser.UserName : Model.CurrentUser.Name);
+    ViewBag.Title = string.Concat("Push To Play - ", _name);
+}
+
+<div style="padding-left: 10px; padding-top: 10px; padding-right: 10px;">
+    <div class="displayAreaColor">
+        <!-- image div -->
+        <div class="leftItem displayAreaColor profilePanelImageCell">
+            <a href="@Url.Action("home", "user", new { id = Model.CurrentUser.UserName.ToLower() })">
+                <img class="profileImageSize border-color borderColorStrong" src=@WebHelper.GetUserImagePath(Model.CurrentUser.Id, true)/>
+            </a>
+        </div>
+        <!-- content div -->
+        <div class="leftItem displayAreaColor profilePanelDataCell" style="display: inline-block">
+            <div style="float: right; margin-top: 6px;">
+                <div class="rightItemUserCard">
+                    <div style="text-align: center">
+                        <i class="icon-calendar fieldTextStrong"></i>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="" class="fieldTextStrong">0</a>
+                    </div>
+                </div>
+                <div class="rightItemIcon">
+                    <div style="text-align: center">
+                        <i class="icon-cube fieldTextStrong"></i>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="" class="fieldTextStrong">0</a>
+                    </div>
+                </div>
+                <div class="rightItemIcon">
+                    <div style="text-align: center">
+                        <i class="icon-cube-2 fieldTextStrong"></i>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="@Url.RouteUrl(Constants.ROUTE_USER_HOME_GROUP, new { id = Model.CurrentUser.UserName.ToLower() })" class="fieldTextStrong">0</a>
+                    </div>
+                </div>
+                <div class="rightItemIcon">
+                    <div style="text-align: center">
+                        <i class="icon-target-2 fieldTextStrong"></i>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="@Url.Action("game", "user", new { id = Model.CurrentUser.UserName.ToLower() })" class="fieldTextStrong">@PushToPlay.Model.UserGame.GetGamesbyUserId(Model.CurrentUser.Id)</a>
+                    </div>
+                </div>
+                <div class="rightItemIcon">
+                    <div style="text-align: center">
+                        <i class="icon-user fieldTextStrong"></i>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="@Url.Action("friends", "user", new { id = Model.CurrentUser.UserName.ToLower() })" class="fieldTextStrong">@PushToPlay.Model.RelationFriend.GetRelationCount(Model.CurrentUser.Id, PushToPlay.Model.RelationFriendEnum.Friend)</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="@Url.Action("home", "user", new { id = Model.CurrentUser.UserName.ToLower() })">
+                <h2 class="fieldText no-margin">@_name</h2>
+            </a>
+            <small class="fieldTextStrong" style="margin-left: 5px;">@Model.CurrentUser.UserName</small>
+            <div class="contentColor" style="height: 1px; margin-right: -10px;"></div>
+            <div style="width: 730px;">
+                <div style="float: right">
+
+                    @if (Model.LoggedUser != null && Model.LoggedUser.Id != Model.CurrentUser.Id)
+                    {
+                        string _iconText = string.Empty;
+                        string _buttonIcon = string.Empty;
+                        string _buttonClass = string.Empty;
+
+                        string _iconText2 = string.Empty;
+                        string _buttonIcon2 = string.Empty;
+                        string _buttonClass2 = string.Empty;
+
+
+                        switch (Model.RelationWith)
+                        {
+                            case PushToPlay.Model.RelationFriendEnum.NotFriend:
+                                _buttonIcon = "icon-plus";
+                                _buttonClass = "buttonOkNoMargin";
+                                _iconText = "Adicionar";
+                                break;
+                            case PushToPlay.Model.RelationFriendEnum.Friend:
+                                _buttonIcon = "icon-minus";
+                                _buttonClass = "buttonNOkNoMargin";
+                                _iconText = "Remover";
+                                break;
+                            case PushToPlay.Model.RelationFriendEnum.Asked:
+                                _buttonIcon = "icon-cancel";
+                                _buttonClass = "buttonNOkNoMargin";
+                                _iconText = "Cancelar";
+                                break;
+                            case PushToPlay.Model.RelationFriendEnum.Pending:
+                                _buttonIcon = "icon-checkmark";
+                                _buttonClass = "buttonOkNoMargin";
+                                _iconText = "Aceitar";
+
+                                _buttonIcon2 = "icon-cancel";
+                                _buttonClass2 = "buttonNOkNoMargin";
+                                _iconText2 = "Negar";
+                                break;
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(_buttonClass2))
+                        {
+                        <a href="@Url.Action("RelationActionUrl", "user", new { id = Model.CurrentUser.Id, param = "deny" })">
+                            <button class="@_buttonClass2" style="margin-right:5px;"><i class="@_buttonIcon2"></i>@_iconText2</button>
+                        </a>                            
+                        }
+                                                
+                        <a href="@Url.Action("RelationActionUrl", "user", new { id = Model.CurrentUser.Id })">
+                            <button class="@_buttonClass"><i class="@_buttonIcon"></i>@_iconText</button>
+                        </a>                       
+                    }
+                </div>
+                <div style="margin-top: 10px;">
+                    @if (!string.IsNullOrWhiteSpace(Model.CurrentUser.PsnId))
+                    {
+                        <div class="tableCell" style="padding-right: 10px;">
+                            <img src="~/Content/images/platform/psn.png" width="28px" style="vertical-align: middle" />
+                            <span class="fieldTextStrong">@Model.CurrentUser.PsnId</span>
+                        </div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.CurrentUser.GamerTag))
+                    {
+                        <div class="tableCell" style="padding-right: 10px;">
+                            <img src="~/Content/images/platform/xbox_live.png" width="28px" style="vertical-align: middle" />
+                            <span class="fieldTextStrong">@Model.CurrentUser.GamerTag</span>
+                        </div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.CurrentUser.OriginId))
+                    {
+                        <div class="tableCell" style="padding-right: 10px;">
+                            <img src="~/Content/images/platform/origin.png" width="28px" style="vertical-align: middle" />
+                            <span class="fieldTextStrong">@Model.CurrentUser.OriginId</span>
+                        </div>
+                    }
+                </div>
+                <div style="margin-top: 10px;">
+                    <span class="fieldTextStrong">@Model.CurrentUser.Description</span>
+                </div>
+            </div>
+        </div>
+        <div class="clearBoth"></div>
+        <div class="contentColor" style="height: 1px; margin-right: -10px; margin-left: -10px;">
+        </div>
+        <div class="displayAreaColor" style="padding-left: 10px; padding-top: 5px; padding-right: 10px; padding-bottom: 7px;">
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="@Url.Action("friends", "user", new { id = Model.CurrentUser.UserName.ToLower() })" class="no-padding no-margin">
+                    <div class="fieldText">
+                        <i class="icon-user no-margin no-padding"></i>
+                        Amigos
+                    </div>
+                </a>
+            </div>
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="@Url.Action("game", "user", new { id = Model.CurrentUser.UserName.ToLower() })" class="no-padding no-margin">
+                    <div class="fieldText">
+                        <i class="icon-target-2 no-margin no-padding"></i>
+                        Jogos
+                    </div>
+                </a>
+            </div>
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="@Url.RouteUrl(Constants.ROUTE_USER_HOME_GROUP, new { id = Model.CurrentUser.UserName.ToLower() })" class="no-padding no-margin">
+                    <div class="fieldText">
+                        <i class="icon-cube-2 no-margin no-padding"></i>
+                        Grupos
+                    </div>
+                </a>
+            </div>
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="/" class="no-padding no-margin">
+                    <div class="fieldText">
+                        <i class="icon-cube no-margin no-padding"></i>
+                        Clans
+                    </div>
+                </a>
+            </div>
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="/" class="no-padding no-margin">
+                    <div class="fieldText">
+                        <i class="icon-calendar no-margin no-padding"></i>
+                        Eventos
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 10px; vertical-align: top">
+    @RenderSection("Content", true)
+</div>
+
+@section scripts{
+    @RenderSection("scripts", false)
+}

@@ -1,0 +1,33 @@
+﻿@using PushToPlay.WEB;
+@model PushToPlay.WEB.Models.GroupCompactViewModel
+
+<div class="BGColor" style="margin-right: 5px; margin-bottom: 10px; padding-right: 9px; padding-left: 9px; padding-top: 9px; padding-bottom: 6px;">
+    <div style="position: relative">
+        @if (Model.LoggedUser != null)
+        {
+            if (Model.UserHas)
+            {                
+            <div data-group-action="leave" 
+                 data-group-id="@Model.GroupId"
+                 data-group-container="@Model.AjaxDivContent"
+                 style='width: 32px; height: 32px; position: absolute; bottom: 6px; right: 2px;cursor:pointer' 
+                 class='buttonNOkNoMargin'>
+                <i class='icon-minus' style='margin-left: 7px; margin-top: 7px;'></i>
+            </div>
+            }
+            else
+            {
+            <div data-group-action="join" 
+                 data-group-id="@Model.GroupId"
+                 data-group-container="@Model.AjaxDivContent"
+                 style='width: 32px; height: 32px; position: absolute; bottom: 6px; right: 2px;cursor:pointer' 
+                 class='buttonOkNoMargin'>
+                <i class='icon-plus' style='margin-left: 7px; margin-top: 7px;'></i>
+            </div>
+            }
+        }
+        <a href="@Url.RouteUrl(Constants.ROUTE_GROUP_HOME, new { id = Model.GroupId, name = Model.GroupName })">
+            <img src="@Model.GroupImage" style="width:128px;height:128px;" />
+        </a>
+    </div>
+</div>

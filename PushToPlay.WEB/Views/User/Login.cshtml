@@ -1,0 +1,20 @@
+﻿@using PushToPlay.WEB;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session[Constants.SESSION_MUST_BE_LOGGED_MSG] != null)
+{
+    Session[Constants.SESSION_MUST_BE_LOGGED_MSG] = null;
+    <div class="notices" style="width: 330px; margin-right: auto; margin-left: auto; margin-top: 10px">
+        <div class="bg-color-yellow">
+            <div class="notice-header fg-color-darken">Atenção!</div>
+            <br />
+            <div class="notice-text fg-color-darken">Você deve estar logado para completar esta ação.</div>
+        </div>
+    </div>
+}
+@using (Html.BeginForm("login", "user", FormMethod.Post))
+{    
+    Html.RenderPartial("LoginPartial");
+}

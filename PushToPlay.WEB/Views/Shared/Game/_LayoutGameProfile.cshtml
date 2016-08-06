@@ -1,0 +1,160 @@
+﻿@using PushToPlay.WEB;
+@model PushToPlay.WEB.Models.GameHomeViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+
+@{
+    var classBorderColor = WebHelper.GetCSSNormalBorderGame(Model.PlatformID);
+    var classFieldText = PushToPlay.Helpers.NetHelper.GetCSSNormalTextGame(Model.PlatformID);
+    var classFieldTextStrong = PushToPlay.Helpers.NetHelper.GetCSSStrongTextGame(Model.PlatformID);
+    var classLinkColor = PushToPlay.Helpers.NetHelper.GetCSSLinkGame(Model.PlatformID);
+}
+
+<div style="padding-left: 10px; padding-top: 10px; padding-right: 10px;">
+    <div class="displayAreaColor">
+        <!-- image div -->
+        <div class="leftItem displayAreaColor profilePanelImageCell">
+            <a href="@Url.RouteUrl(Constants.ROUTE_GAME_HOME, new { id = Model.GameDetailId, gamename = WebHelper.ProcessUrlEnconding(Model.GameName) })">
+                <img src="@WebHelper.GetGameImagePath(Model.GameImage)" class="border-color @classBorderColor" style="width:176px;" />
+            </a>
+        </div>
+        <!-- content div -->
+        <div class="leftItem displayAreaColor profilePanelDataCell" style="display: inline-block">
+            <div style="float: right; margin-top: 6px;">
+                <div class="rightItemUserCard">
+                    <a href="" class="@classLinkColor">
+                        <div style="text-align: center">
+                            <i class="icon-calendar" style="width: 14px;"></i>
+                        </div>
+                        <div style="text-align: center">
+                            0
+                        </div>
+                    </a>
+                </div>
+                <div class="rightItemIcon">
+                    <a href="" class="@classLinkColor">
+                        <div style="text-align: center;">
+                            <i class="icon-cube" style="width: 14px;"></i>
+                        </div>
+                        <div style="text-align: center">
+                            0
+                        </div>
+                    </a>
+                </div>
+                <div class="rightItemIcon">
+                    <a href="" class="@classLinkColor">
+                        <div style="text-align: center">
+                            <i class="icon-cube-2" style="width: 13px;"></i>
+                        </div>
+                        <div style="text-align: center">
+                            0
+                        </div>
+                    </a>
+                </div>
+                <div class="rightItemIcon">
+                    <a href="" class="@classLinkColor">
+                        <div style="text-align: center">
+                            <i class="icon-user" style="width: 14px;"></i>
+                        </div>
+                        <div style="text-align: center">
+                            0
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <a href="@Url.RouteUrl(Constants.ROUTE_GAME_HOME, new { id = Model.GameDetailId, gamename = WebHelper.ProcessUrlEnconding(Model.GameName) })">
+                <h2 class="@classFieldText no-margin">@Model.GameName</h2>
+            </a>
+            <small class="@classFieldTextStrong" style="margin-left: 5px;">@Model.PlatformName</small>
+            <div class="contentColor" style="height: 1px; margin-right: -10px;"></div>
+            <div style="width: 730px;">
+                <div style="float: right">
+                    @if (Model.LoggedUser != null)
+                    {
+                        if (Model.UserHas)
+                        {
+                        <a href="@Url.RouteUrl(Constants.ROUTE_GAME_HOME_DEL, new { id = Model.GameDetailId })">
+                            <button type="button" class="buttonNOkNoMargin"><i class="icon-minus"></i>Remover</button>
+                        </a>
+                        }
+                        else
+                        {
+                        <a href="@Url.RouteUrl(Constants.ROUTE_GAME_HOME_ADD, new { id = Model.GameDetailId })">
+                            <button type="button" class="buttonOkNoMargin"><i class="icon-plus"></i>Adicionar</button>
+                        </a>
+                        }
+                    }
+                </div>
+                <div style="margin-top: 10px;">
+                    <div style="margin-top: 10px; margin-left: 5px;">
+                        <span class="@classFieldTextStrong">@Model.Publisher</span>
+                    </div>
+                    <div style="margin-top: 5px; margin-left: 5px;">
+                        <span class="@classFieldTextStrong">@Model.Developer</span>
+                    </div>
+                    @if (Model.ReleaseDate.HasValue)
+                    {
+                        <div style="margin-top: 5px; margin-left: 5px;">
+                            <span class="@classFieldTextStrong">@Model.ReleaseDate.Value.ToString("dd/MM/yyyy")</span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="clearBoth"></div>
+        <div class="contentColor" style="height: 1px; margin-right: -10px; margin-left: -10px;">
+        </div>
+        <div class="displayAreaColor" style="padding-left: 10px; padding-top: 5px; padding-right: 10px; padding-bottom: 7px;">
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="" class="no-padding no-margin">
+                    <div class="@classLinkColor">
+                        <i class="icon-user no-margin no-padding"></i>
+                        Amigos
+                    </div>
+                </a>
+            </div>
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="/" class="no-padding no-margin">
+                    <div class="@classLinkColor">
+                        <i class="icon-cube-2 no-margin no-padding"></i>
+                        Grupos
+                    </div>
+                </a>
+            </div>
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="/" class="no-padding no-margin">
+                    <div class="@classLinkColor">
+                        <i class="icon-cube no-margin no-padding"></i>
+                        Clans
+                    </div>
+                </a>
+            </div>
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="/" class="no-padding no-margin">
+                    <div class="@classLinkColor">
+                        <i class="icon-calendar no-margin no-padding"></i>
+                        Eventos
+                    </div>
+                </a>
+            </div>
+            <div class="leftItem" style="margin-right: 10px;">
+                <a href="@Url.RouteUrl(Constants.ROUTE_GAME_HOME_STREAMS, new { id = Model.GameDetailId, gamename = WebHelper.ProcessUrlEnconding(Model.GameName) })" class="no-padding no-margin">
+                    <div class="@classLinkColor">
+                        <i class="icon-film no-margin no-padding"></i>
+                        Live
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 10px; vertical-align: top">
+    @RenderSection("Content", true)
+</div>
+
+@section scripts{
+    @RenderSection("scripts", false)
+}

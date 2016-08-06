@@ -1,0 +1,15 @@
+﻿@using PushToPlay.WEB.Models
+
+@model IEnumerable<UserCompactViewModel>
+
+<div style="padding-top: 3px; padding-left: 10px; padding-bottom: 7px;">
+    @foreach (var _userCompactViewModel in Model)
+    {
+        <div style="float: left; margin-right: 10px; margin-top: 7px;">
+            <a href="@Url.Action("home", "user", new { id = _userCompactViewModel.UserName.ToLower() })">
+                <img src="@_userCompactViewModel.UserImagePath" style="height:55px;width:38px;"/>
+            </a>
+        </div>
+    }
+    <div class="clearBoth"></div>
+</div>

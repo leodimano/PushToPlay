@@ -1,0 +1,51 @@
+﻿@model PushToPlay.WEB.Models.UserProfileViewModel
+@{
+    Layout = "~/Views/Shared/User/_LayoutUserProfile.cshtml";
+}
+
+@section Content{
+
+    <div class="padding10">
+        <div class="displayAreaColor">
+            @using (@Html.BeginForm("profile", "user", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div style="padding-top: 5px; padding-left: 10px; padding-right: 10px;">
+                    <h3 class="fieldText">Gerenciar perfil</h3>
+                </div>
+                <div class="contentColor" style="height: 1px; margin-right: -10px; margin-left: -10px;"></div>
+                <div style="padding-left: 10px; padding-top: 7px; padding-bottom: 15px; padding-right: 10px;">
+                    <div>
+                        @Html.LabelFor(m => m.Name, new { @class = "fieldTextStrong" })<br />
+                        @Html.TextBoxFor(m => m.Name, new { @class = "normalTextBox caixatexto" })
+                    </div>
+                    <div style="margin-top: 10px;position:relative">
+                        @Html.Label("Foto", new { @class = "fieldTextStrong" })<br />
+                        <button class="buttonOkNoMargin" >Escolher</button>
+                        <input class="border-color" type="file" name="file" id="file" style="width: 90px; height: 33px; position: absolute; top:19px;left:0px; opacity: 0;cursor:pointer" accept="image/x-png, image/gif, image/jpeg" />
+                    </div>
+                    <div style="margin-top: 10px;">
+                        @Html.LabelFor(m => m.Description, new { @class = "fieldTextStrong" })<br />
+                        @Html.TextAreaFor(m => m.Description, new { @class = "normalTextArea", style="width:700px;" })
+                    </div>
+                    <div style="margin-top: 10px;">
+                        @Html.LabelFor(m => m.PsnId, new { @class = "fieldTextStrong" })<br />
+                        @Html.TextBoxFor(m => m.PsnId, new { @class = "normalTextBox" })
+                    </div>
+                    <div style="margin-top: 10px;">
+                        @Html.LabelFor(m => m.GamerTag, new { @class = "fieldTextStrong" })<br />
+                        @Html.TextBoxFor(m => m.GamerTag, new { @class = "normalTextBox" })
+                    </div>
+                    <div style="margin-top: 10px;">
+                        @Html.LabelFor(m => m.OriginId, new { @class = "fieldTextStrong" })<br />
+                        @Html.TextBoxFor(m => m.OriginId, new { @class = "normalTextBox" })
+                    </div>
+                </div>
+                <div class="contentColor" style="height: 1px; margin-right: -10px; margin-left: -10px;"></div>
+                <div style="text-align: right; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
+                    <button type="submit" class="no-padding no-margin buttonOkNoMargin">Atualizar</button>
+                </div>
+            }
+        </div>
+    </div>
+}
+

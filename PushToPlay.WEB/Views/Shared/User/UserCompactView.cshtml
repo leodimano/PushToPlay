@@ -1,0 +1,87 @@
+﻿@using PushToPlay.WEB;
+@model PushToPlay.WEB.Models.UserCompactViewModel
+
+@{
+    string _buttonName = Model.UserId.ToString();
+    string _iconText = string.Empty;
+    string _buttonIcon = string.Empty;
+    string _buttonClass = string.Empty;
+
+    string _buttonName2 = string.Concat(Model.UserId.ToString(), "_2");
+    string _iconText2 = string.Empty;
+    string _buttonIcon2 = string.Empty;
+    string _buttonClass2 = string.Empty;
+
+
+    switch (Model.RelationStatus)
+    {
+        case PushToPlay.Model.RelationFriendEnum.NotFriend:
+            _buttonIcon = "icon-plus";
+            _buttonClass = "buttonOkNoMargin";
+            _iconText = "Adicionar";
+            break;
+        case PushToPlay.Model.RelationFriendEnum.Friend:
+            _buttonIcon = "icon-minus";
+            _buttonClass = "buttonNOkNoMargin";
+            _iconText = "Remover";
+            break;
+        case PushToPlay.Model.RelationFriendEnum.Asked:
+            _buttonIcon = "icon-cancel";
+            _buttonClass = "buttonNOkNoMargin";
+            _iconText = "Cancelar";
+            break;
+        case PushToPlay.Model.RelationFriendEnum.Pending:
+            _buttonIcon = "icon-checkmark";
+            _buttonClass = "buttonOkNoMargin";
+            _iconText = "Aceitar";
+
+            _buttonIcon2 = "icon-cancel";
+            _buttonClass2 = "buttonNOkNoMargin";
+            _iconText2 = "Negar";
+            break;
+    }
+
+}
+
+<div class="BGColor" style="margin-right: 5px; margin-bottom: 10px; padding-right: 9px; padding-left: 9px; padding-top: 9px; padding-bottom: 6px;">
+    <div style="position: relative">
+        @if (Model.LoggedUser    != null &&
+             Model.LoggedUser.Id != Model.UserId)
+        {
+            @Ajax.RawActionLink(string.Format(@"<div style='width: 32px; height: 32px; position: absolute;bottom:6px;right:2px;' class='{0}'>
+                                                <i class='{1}' style='margin-left: 7px; margin-top: 7px;'></i>
+                                            </div>", _buttonClass, _buttonIcon),
+                                   "RelationAction",
+                                   "user",
+                                   new { id = Model.UserId },
+                                   new AjaxOptions
+                                   {
+                                       UpdateTargetId = Model.AjaxDivContent,
+                                       InsertionMode = InsertionMode.Replace,
+                                       HttpMethod = "Post"
+                                   }, null)
+
+            if (!string.IsNullOrWhiteSpace(_buttonIcon2))
+            {
+                
+                @Ajax.RawActionLink(string.Format(@"<div style='width: 32px; height: 32px; position: absolute;bottom:6px;left:2px;' class='{0}'>
+                                                        <i class='{1}' style='margin-left: 7px; margin-top: 7px;'></i>
+                                                    </div>", _buttonClass2, _buttonIcon2),
+                                           "RelationAction",
+                                           "user",
+                                           new { id = Model.UserId, param = "deny" },
+                                           new AjaxOptions
+                                           {
+                                               UpdateTargetId = Model.AjaxDivContent,
+                                               InsertionMode = InsertionMode.Replace,
+                                               HttpMethod = "Post"
+                                           }, null)                
+                
+                
+            }
+        }
+        <a href="@Url.RouteUrl(Constants.ROUTE_USER_HOME, new { id = Model.UserName.ToLower() })">
+            <img src="@Model.UserImagePath" style="width:128px;height:128px;" />
+        </a>
+    </div>
+</div>

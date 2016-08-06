@@ -1,0 +1,103 @@
+﻿@using PushToPlay.WEB;
+
+@model PushToPlay.WEB.Models.GameSearchViewModel
+
+@{
+    ViewBag.Title = "Push To Play - Jogos";
+    Layout = "~/Views/Shared/_LayoutSide.cshtml";
+}
+
+@section SectionSideBar{
+
+    @{
+        string classPC = PushToPlay.Helpers.NetHelper.GetCSSNormalTextGame(5);
+        string classPS4 = PushToPlay.Helpers.NetHelper.GetCSSNormalTextGame(8);
+        string classXONE = PushToPlay.Helpers.NetHelper.GetCSSNormalTextGame(7);
+        string classWiiU = PushToPlay.Helpers.NetHelper.GetCSSNormalTextGame(6);
+        string classPS3 = PushToPlay.Helpers.NetHelper.GetCSSStrongTextGame(3);
+        string classX360 = PushToPlay.Helpers.NetHelper.GetCSSStrongTextGame(2);
+        string classWii = PushToPlay.Helpers.NetHelper.GetCSSNormalTextGame(4);
+        string classMAC = PushToPlay.Helpers.NetHelper.GetCSSStrongTextGame(1);
+        string classLinux = PushToPlay.Helpers.NetHelper.GetCSSStrongTextGame(9);
+            
+    }
+
+    <div class="displayAreaColor" style="padding-top: 5px; padding-bottom: 2px; padding-left: 10px;">
+        <div class="leftItem" style="padding-top: 3px; padding-bottom: 5px;">
+            <span class="fieldTextStrong">Buscar por</span>
+            <span class="fieldText">Jogos</span>
+        </div>
+        <div class="leftItem" style="padding-top: 3px; padding-bottom: 5px; margin-left: 5px;">
+            @Html.TextBox("txtSearch", string.Empty, new { @class = "normalTextBox" })
+        </div>
+        <div class="leftItem" style="padding-top: 3px; padding-bottom: 5px; margin-left: 5px; vertical-align: top; margin-right: 10px;">
+            <button id="btnSearch" class="buttonSearch">Buscar</button>
+        </div>
+        <div class="leftItem gameSearchBarCheckBox">
+            @Html.CheckBox("chkPC", false)
+            <span class="labelCheckBox @classPC" data-checkbox-name="#chkPC" id="lblPC">PC</span>
+        </div>
+        <div class="leftItem gameSearchBarCheckBox">
+            @Html.CheckBox("chkPS4")
+            <span class="labelCheckBox @classPS4" data-checkbox-name="#chkPS4" id="lblPS4">PS4</span>
+        </div>
+        <div class="leftItem gameSearchBarCheckBox">
+            @Html.CheckBox("chkPS3")
+            <span class="labelCheckBox @classPS3" id="lblPS3" data-checkbox-name="#chkPS3">PS3</span>
+        </div>
+        <div class="leftItem gameSearchBarCheckBox">
+            @Html.CheckBox("chkXONE")
+            <span class="labelCheckBox @classXONE" id="lblXONE" data-checkbox-name="#chkXONE">XONE</span>
+        </div>
+        <div class="leftItem gameSearchBarCheckBox">
+            @Html.CheckBox("chkX360")
+            <span class="labelCheckBox @classX360" id="lblX360" data-checkbox-name="#chkX360">X360</span>
+        </div>
+        <div class="leftItem gameSearchBarCheckBox">
+            @Html.CheckBox("chkWiiU")
+            <span class="labelCheckBox @classWiiU" id="lblWiiU" data-checkbox-name="#chkWiiU">Wii</span><span class="labelCheckBox @classPS3" data-checkbox-name="#chkWiiU">U</span>
+        </div>
+        <div class="leftItem gameSearchBarCheckBox">
+            @Html.CheckBox("chkWii")
+            <span class="labelCheckBox @classWii" id="lblWii" data-checkbox-name="#chkWii">Wii</span>
+        </div>
+        <div class="leftItem gameSearchBarCheckBox" style="display:none">
+            @Html.CheckBox("chkMAC")
+            <span class="labelCheckBox @classMAC" id="lblMAC" data-checkbox-name="#chkMAC">MAC</span>
+        </div>
+        <div class="leftItem gameSearchBarCheckBox" style="display:none">
+            @Html.CheckBox("chkLinux")
+            <span class="labelCheckBox @classLinux" id="lblLinux" data-checkbox-name="#chkLinux">Linux</span>
+        </div>
+    </div>
+
+}
+
+@section SectionContent{
+
+    <div id="SearchContent">
+
+        @if (Model.ObjectCount > 0)
+        {
+            foreach (var _compactView in Model.ListGameCompactViewModel)
+            {
+            <div id="@_compactView.AjaxDivContent" class="leftItem">
+                @{Html.RenderPartial("GameCompactView", _compactView);}
+            </div>
+            }
+
+            if (Model.TotalPage > 1)
+            {
+            <div style="text-align: center;">
+                @Html.PushToPlayPager(Model.TotalPage, Model.CurrentPage)
+            </div>            
+            }
+
+        }
+    </div>
+
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/Views/Game/Search.js")
+}

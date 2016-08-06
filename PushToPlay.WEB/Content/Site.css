@@ -1,0 +1,1193 @@
+﻿@font-face {
+    font-family: "PT Serif Caption";
+    font-style: normal;
+    font-weight: 400;
+    src: local("PT Serif Caption"),local("PTSerif-Caption"),url(https://themes.googleusercontent.com/static/fonts/ptserifcaption/v4/7xkFOeTxxO1GMC1suOUYWWhBabBbEjGd1iRmpyoZukE.woff) format('woff');
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Open Sans Bold"),local("OpenSans-Bold"),url(https://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzJ1r3JsPcQLi8jytr04NNhU.woff) format('woff');
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Open Sans Light"),local("OpenSans-Light"),url(https://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTZ1r3JsPcQLi8jytr04NNhU.woff) format('woff');
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 800;
+    src: local("Open Sans Extrabold"),local("OpenSans-Extrabold"),url(https://themes.googleusercontent.com/static/fonts/opensans/v6/EInbV5DfGHOiMmvb1Xr-hp1r3JsPcQLi8jytr04NNhU.woff) format('woff');
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Open Sans"),local("OpenSans"),url(https://themes.googleusercontent.com/static/fonts/opensans/v6/K88pR3goAWT7BTt32Z01mz8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+html, button, input, select, textarea {
+    font-family: sans-serif;
+}
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+b, strong {
+    font-weight: bold;
+}
+
+blockquote {
+    margin: 1em 40px;
+}
+
+dfn {
+    font-style: italic;
+}
+
+mark {
+    background: #ff0;
+    color: #000;
+}
+
+p, pre {
+    margin: 1em 0;
+}
+
+pre, code, kbd, samp {
+    font-family: monospace,serif;
+    _font-family: 'courier new',monospace;
+    font-size: 1em;
+}
+
+pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+q {
+    quotes: none;
+}
+
+    q:before, q:after {
+        content: '';
+        content: none;
+    }
+
+small {
+    font-size: 75%;
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+dl, menu, ol, ul {
+    margin: 1em 0;
+}
+
+dd {
+    margin: 0 0 0 40px;
+}
+
+menu, ol, ul {
+    padding: 0 0 0 40px;
+}
+
+nav ul, nav ol {
+    list-style: none;
+    list-style-image: none;
+}
+
+img {
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+figure {
+    margin: 0;
+}
+
+form {
+    margin: 0;
+}
+
+fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: .35em .625em .75em;
+}
+
+legend {
+    border: 0;
+    padding: 0;
+    white-space: normal;
+    *margin-left: -7px;
+}
+
+button, input, select, textarea {
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
+    *vertical-align: middle;
+}
+
+button, input {
+    line-height: normal;
+}
+
+    button, input[type="button"], input[type="reset"], input[type="submit"] {
+        cursor: pointer;
+        -webkit-appearance: button;
+        *overflow: visible;
+    }
+
+        button[disabled], input[disabled] {
+            cursor: default;
+        }
+
+    input[type="checkbox"], input[type="radio"] {
+        box-sizing: border-box;
+        padding: 0;
+        *height: 13px;
+        *width: 13px;
+    }
+
+    input[type="search"] {
+        -webkit-appearance: textfield;
+        -moz-box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+
+        input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button {
+            -webkit-appearance: none;
+        }
+
+    button::-moz-focus-inner, input::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+
+button {
+    font-family: 'Segoe UI','Open Sans',Verdana,Arial,Helvetica,sans-serif;
+    font-weight: 400;
+    font-size: 9pt;
+    font-smooth: always;
+    font-size: 14px;
+    display: inline-block;
+    padding: 4px 12px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle!important;
+    min-width: 90px;
+    height: 32px;
+    background-color: #ccc;
+    border: 1px transparent solid;
+    color: #353535;
+    border-raduis: 0;
+    cursor: pointer;
+    width: auto;
+    *zoom: 1;
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top;
+}
+
+
+body, p, div {
+    font-family: 'Segoe UI Semilight','Open Sans',Verdana,Arial,Helvetica,sans-serif;
+    font-weight: 300;
+    font-size: 11pt;
+    letter-spacing: .02em;
+    line-height: 20px;
+    font-smooth: always;
+}
+
+a {
+    font-family: 'Segoe UI','Open Sans',Verdana,Arial,Helvetica,sans-serif;
+    font-weight: 400;
+    font-size: 11pt;
+    font-smooth: always;
+    color: #2e92cf;
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Segoe UI Light','Open Sans',Verdana,Arial,Helvetica,sans-serif;
+    font-weight: 200;
+    font-size: 42pt;
+    letter-spacing: .00em;
+    line-height: 44pt;
+    font-smooth: always;
+    color: #000;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+h2 {
+    font-family: 'Segoe UI Light','Open Sans',Verdana,Arial,Helvetica,sans-serif;
+    font-weight: 200;
+    font-size: 20pt;
+    letter-spacing: .01em;
+    line-height: 24pt;
+    font-smooth: always;
+    color: #000;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+h3 {
+    font-family: 'Segoe UI Light','Open Sans',Verdana,Arial,Helvetica,sans-serif;
+    font-weight: 200;
+    font-size: 20pt;
+    letter-spacing: .01em;
+    line-height: 24pt;
+    font-smooth: always;
+    color: rgba(0,0,0,0.6);
+    font-size: 16pt;
+    line-height: 24px;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+h4 {
+    font-family: 'Segoe UI Semibold','Open Sans',Verdana,Arial,Helvetica,sans-serif;
+    font-weight: 600;
+    font-size: 11pt;
+    letter-spacing: .01em;
+    line-height: 14pt;
+    font-smooth: always;
+    color: #000;
+    color: rgba(0,0,0,0.6);
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+h5 {
+    font-family: 'Segoe UI Semibold','Open Sans',Verdana,Arial,Helvetica,sans-serif;
+    font-weight: 600;
+    font-size: 11pt;
+    letter-spacing: .01em;
+    line-height: 14pt;
+    font-smooth: always;
+    color: rgba(0,0,0,0.6);
+    font-size: 90%;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+h6 {
+    font-family: 'Segoe UI Semibold','Open Sans',Verdana,Arial,Helvetica,sans-serif;
+    font-weight: 600;
+    font-size: 11pt;
+    letter-spacing: .01em;
+    line-height: 14pt;
+    font-smooth: always;
+    color: rgba(0,0,0,0.6);
+    font-size: 80%;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+
+/* Remasterizados */
+
+.PushToPlayContentWindow {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.no-border {
+    border: 0px !important;
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+
+.no-margin {
+    margin: 0px !important;
+}
+
+.positionDiv {
+    position: absolute;
+}
+
+.logoDiv {
+    height: 50px;
+    line-height: 50px;
+    float: left;
+}
+
+.fastTabDiv {
+    height: 50px;
+    line-height: 50px;
+    float: right;
+}
+
+.crossLine {
+    height: 1px;
+}
+
+.crossLineNoMargin {
+    height: 1px;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+.clearBoth {
+    clear: both;
+}
+
+.marginBottom10 {
+    margin-bottom: 10px;
+}
+
+.marginLeft10 {
+    margin-left: 10px;
+}
+
+.marginTop10 {
+    margin-top: 10px;
+}
+
+.sideBar {
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+.sideBarContent {
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.labelCheckBox {
+    cursor: default;
+}
+
+.gameSearchBarCheckBox {
+    padding-top: 6px;
+    padding-bottom: 5px;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+/* Feed Style -- BEGIN */
+
+.divFeedContainer {
+    margin-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.divFeedItem {
+    margin-bottom: 5px;
+}
+
+.imgFeedItem {
+    width: 100%;
+    height: 92px;
+}
+
+.divFeedGamePromo {
+    width: 250px;
+    margin: -8px;
+    padding: 5px;
+}
+
+.divFeedGameTitle {
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.divFeedGameTitleMargin {
+    margin-left: -20px;
+}
+
+.divFeedNuuvemPlatformImage {
+    background-image: url(/Content/images/platform/nuuvem.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    float: left;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.divFeedSteamPlatformImage {
+    background-image: url(/Content/images/platform/steam.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    float: left;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.divFeedGameColumn1 {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.divFeedGameColumn2 {
+    float: left;
+    width: 50%;
+}
+
+.divFeedGamePercent {
+    margin-right: 5px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px;
+    height: 55px;
+    line-height: 55px;
+}
+
+.divFeedOriginalPrice {
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #802020;
+    color: #d5e7ec;
+}
+
+.divFeedDiscountPrice {
+    margin-right: 0px;
+    text-align: center;
+    padding: 5px;
+    background-color: #1e7145;
+    color: #d5e7ec;
+}
+
+/* Feed Style -- END   */
+
+/* Antigos */
+
+.input-control.text.caixatexto,
+.input-control.password.caixatexto {
+    width: 200px;
+}
+
+.input-control.text.caixatextoemail {
+    width: 300px;
+}
+
+.input-control.text.caixalink {
+    width: 450px;
+}
+
+.input-control.text.caixatextosmall,
+.input-control.password.caixatextosmall {
+    width: 150px;
+}
+
+.borderColor {
+    border-color: #ffc40d !important;
+}
+
+.borderColorStrong {
+    border-color: #e3a21a !important;
+}
+
+.controlSeparator {
+    margin-top: 5px;
+}
+
+.buttonSeparator {
+    margin-top: 10px;
+}
+
+.containerButton {
+    margin-top: 20px;
+}
+
+.buttonOkNoMargin {
+    background-color: #1e7145 !important;
+    color: #d5e7ec !important;
+}
+
+.buttonSearch {
+    background-color: #1e7145 !important;
+    color: #d5e7ec !important;
+    height: 25px;
+    line-height: 5px;
+}
+
+.iconButtonCancelDisplayAreaColor {
+    background-color: #1d1d1d !important;
+    color: #d5e7ec !important;
+}
+
+.buttonOk {
+    margin-top: 20px;
+    background-color: #1e7145 !important;
+    color: #d5e7ec !important;
+}
+
+.buttonNOk {
+    margin-top: 20px;
+    background-color: #802020 !important;
+    color: #d5e7ec !important;
+}
+
+.buttonNOkNoMargin {
+    background-color: #802020 !important;
+    color: #d5e7ec !important;
+}
+
+.steamOpenIdButton {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-image: url(/Content/images/platform/steam/sits_large_border.png);
+    height: 100px;
+    width: 300px;
+}
+
+.xboxFieldText {
+    color: #00a300 !important;
+}
+
+
+.xboxFieldTextStrong {
+    color: #99b433 !important;
+}
+
+.xboxLinkColor {
+    color: #99b433 !important;
+}
+    .xboxLinkColor:hover {
+        color: #00a300 !important;
+    }
+
+.xboxBGColor {
+    background-color: #1d1d1d !important;
+}
+
+    .xboxBGColor:hover {
+        background-color: #00a300 !important;
+    }
+
+        .xboxBGColor:hover > div > a > img {
+            background-color: #1d1d1d !important;
+        }
+
+    .xboxBGColor > div > a > img {
+        border: 1px solid #00a300;
+    }
+
+.psnFieldText {
+    color: #2d89ef !important;
+}
+
+.psnFieldTextStrong {
+    color: #2da1d0 !important;
+}
+
+.psnLinkColor {
+    color: #2da1d0 !important;
+}
+    .psnLinkColor:hover {
+        color: #2d89ef !important;
+    }
+
+.psnBGColor {
+    background-color: #1d1d1d !important;
+}
+
+    .psnBGColor > div > a > img {
+        border: 1px solid #2d89ef;
+    }
+
+    .psnBGColor:hover {
+        background-color: #2d89ef !important;
+    }
+
+        .psnBGColor:hover > div > a > img {
+            background-color: #1d1d1d !important;
+        }
+
+.BGColorLight {
+    background-color: #1d1d1d !important;
+}
+
+    .BGColorLight > div > a > img {
+        border: 1px solid #d5e7ec !important;
+    }
+
+    .BGColorLight:hover {
+        background-color: #d5e7ec !important;
+    }
+
+        .BGColorLight:hover > div > a > img {
+            background-color: #1d1d1d !important;
+        }
+
+.fieldTextLight {
+    color: #d5e7ec !important;
+}
+
+.lightLinkColor {
+    color: #d5e7ec !important;
+}
+    .lightLinkColor:hover {
+        color: #333333 !important;
+    }
+
+.borderColorLight {
+    border-color: #d5e7ec !important;
+}
+
+.fieldText {
+    color: #ffc40d !important;
+}
+
+.fieldTextUnderline {
+    color: #ffc40d !important;
+    text-decoration: underline !important;
+}
+
+.fieldTextStrong {
+    color: #e3a21a !important;
+}
+
+.errorTextStrong {
+    color:darkred;
+}
+
+.BGColor {
+    background-color: #1d1d1d !important;
+}
+
+    .BGColor > div > a > img {
+        border: 1px solid #e3a21a;
+    }
+
+    .BGColor:hover {
+        background-color: #e3a21a !important;
+    }
+
+        .BGColor:hover > div > a > img {
+            background-color: #1d1d1d !important;
+        }
+
+
+.fieldTextStrongUnderline {
+    color: #e3a21a !important;
+    text-decoration: underline !important;
+}
+
+.paginationFieldTextSelected {
+    background-color: #e3a21a !important;
+    color: #1d1d1d !important;
+}
+
+
+.paginationFieldText {
+    background-color: #1d1d1d !important;
+    color: #e3a21a !important;
+}
+
+    .paginationFieldText:hover {
+        color: #ffc40d !important;
+    }
+
+.stickerColor:before {
+    background-color: #e3a21a !important;
+}
+
+#normalBackSticker:hover {
+    background-color: #e3a21a !important;
+    color: #000000 !important;
+}
+
+#xboxBackSticker:hover {
+    background-color: #00a300 !important;
+    color: #000000 !important;
+}
+
+#psnBackSticker:hover {
+    background-color: #2d89ef !important;
+    color: #000000 !important;
+}
+
+fieldset.center {
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 15px;
+    width: 275px;
+}
+
+.backGroundColor {
+    background-color: #292929;
+}
+
+.contentColor {
+    background-color: #333333;
+}
+
+.displayAreaColor {
+    background-color: #1d1d1d !important;
+}
+
+.HorizontalDivider {
+    background-color: #ffc40d !important;
+    margin-right: 25px;
+    margin-top: 15px;
+    height: 1px;
+}
+
+.HorizontalDividerStrong {
+    height: 1px;
+    background-color: #e3a21a !important;
+    margin-right: 25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.leftImage {
+    display: inline-block;
+    margin: 10px;
+}
+
+.leftItem {
+    display: inline-block;
+}
+
+.rightItem {
+    display: inline-block;
+    float: right;
+    /*margin-right: 25px;*/
+}
+
+.rightItemIcon {
+    display: inline-block;
+    float: right;
+    margin-right: 25px;
+}
+
+.rightItemUserCard {
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+}
+
+.gameImageSmall {
+    width: 100px;
+    height: 144px;
+}
+
+.gameCardDescription {
+    top: 0;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 120px;
+    margin-right: 115px;
+}
+
+.gameCardBottomRight {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    margin-bottom: 10px;
+}
+
+.leftGameCardContainer {
+    display: inline-block;
+    width: 466px;
+    height: 167px;
+    position: relative;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+
+.leftGameCard {
+    width: 100%;
+}
+
+.rightItemGameIcon {
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+}
+
+.bottomRightGameCard {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 5px;
+}
+
+.topRightItemGameButton {
+    top: 0;
+    position: absolute;
+    right: 0;
+    margin-top: 10px;
+}
+
+
+.userCard {
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.contentPanel {
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.gameCard {
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-right: 10px;
+}
+
+.gameHomeCardBottomRight {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin-bottom: 5px;
+}
+
+.ButtonDisplayAreaColor {
+    background-color: #1d1d1d !important;
+    color: #e3a21a !important;
+}
+
+    .ButtonDisplayAreaColor:hover {
+        color: #ffc40d !important;
+    }
+
+.ActiveButton {
+    background-color: #e3a21a !important;
+}
+
+.RSSDate {
+    color: #e3a21a !important;
+}
+
+.RSSItem {
+    color: #e3a21a !important;
+}
+
+    .RSSItem :hover {
+        color: #ffc40d !important;
+    }
+
+.MessageDiv {
+    background-color: #1d1d1d !important;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.ReplyMessageDiv {
+    background-color: #1d1d1d !important;
+    margin-top: 10px;
+    margin-left: 80px;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+
+.tableNothing100 {
+    width: 100% !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    border: 0px !important;
+}
+
+.tableNothing100Cell {
+    padding: 0px !important;
+    border: 0px !important;
+}
+
+.tablePaddingLeft100Cell {
+    padding-left: 10px !important;
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+    padding-right: 0px !important;
+    border: 0px !important;
+}
+
+/* Scroll Bar CSS Start */
+::-webkit-scrollbar {
+    width: 16px;
+    height: 3px;
+}
+
+::-webkit-scrollbar-button:start:decrement {
+    background: url("../Content/Images/Arrow-Up.png") no-repeat #1c1c1c;
+}
+
+::-webkit-scrollbar-button:end:increment {
+    background: url("../Content/Images/Arrow-Down.png") no-repeat #1c1c1c;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #1c1c1c;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #292929;
+    border: 1px solid #1c1c1c;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #999;
+}
+
+::-moz-appearance: scrollbarthumb-vertical {
+    background-color: green;
+}
+
+body {
+    scrollbar-track-color: #1c1c1c !important;
+    scrollbar-arrow-color: #e3a21a !important;
+    scrollbar-face-color: #292929 !important;
+    scrollbar-highlight-color: #1c1c1c !important;
+    scrollbar-shadow-color: #1c1c1c !important;
+}
+/* Scroll Bar CSS End */
+
+/* Home CSS Start */
+.menuItem {
+    color: #e3a21a !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+    .menuItem:hover {
+        color: #ffc40d !important;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+
+.profileBarItem {
+    padding-top: 8px;
+    padding-bottom: 3px;
+    padding-right: 10px;
+}
+
+.linkItem {
+    color: #e3a21a !important;
+}
+
+    .linkItem:hover {
+        color: #ffc40d !important;
+    }
+
+/* Home CSS End */
+
+/* Image Size Star */
+.profileBarImage {
+    width: 36px;
+    height: 36px;
+}
+/* Image Size End*/
+
+/* Div CSS Start */
+
+.padding5 {
+    padding-top: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom:10px;
+}
+
+.padding10NoBottom {
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.lolChampionPanelDataCell {
+    padding-top: 5px;
+    padding-bottom: 6px !important;
+    margin-left: -4px;
+    vertical-align: top !important;
+    min-height: 185px;
+    width: 785px;
+}
+
+.lolChampionStats {
+    margin-top: 10px;
+    width: 200px;
+}
+
+.lolChampionStatsRight {
+    margin-top: 10px;
+}
+
+
+.profilePanelDataCell {
+    padding-top: 5px;
+    padding-bottom: 6px !important;
+    margin-left: -4px;
+    vertical-align: top !important;
+    min-height: 185px;
+    width: 743px;
+}
+
+.profilePanelImageCell {
+    margin: 0 !important;
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    padding-top: 10px !important;
+    padding-bottom: 6px !important;
+    vertical-align: top !important;
+}
+
+.profilePanelCell {
+    margin: 0 !important;
+    padding-right: 10px !important;
+    padding-left: 0px !important;
+    padding-top: 10px !important;
+    padding-bottom: 8px !important;
+    vertical-align: top !important;
+}
+
+.profileImageSize {
+    width: 176px;
+    min-height: 176px;
+}
+
+.tableCell {
+    display: table-cell;
+}
+
+.tableDisplay {
+    display: table;
+    width: 100%;
+}
+
+.tableRow {
+    display: table-row;
+}
+
+/* Div CSS End*/
+
+
+
+/********** PAGER *********/
+/********** BEGIN *********/
+.pagerContainer {
+}
+
+.pagerButton {
+    min-width: 32px;
+    min-height: 26px;
+    line-height: 26px;
+    margin-right: 5px;
+    text-align: center;
+    background-color: #1d1d1d !important;
+    color: #ffc40d !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+    .pagerButton:hover {
+        background-color: #e3a21a !important;
+        color: #000000 !important;
+    }
+
+.pagerButtonActive {
+    min-width: 32px;
+    min-height: 26px;
+    line-height: 26px;
+    margin-right: 5px;
+    text-align: center;
+    background-color: #ffc40d !important;
+    color: #000000 !important;
+    cursor: default;
+    font-weight: bold;
+}
+
+    .pagerButtonActive:hover {
+        background-color: #e3a21a !important;
+    }
+
+/********** PAGER *********/
+/**********  END  **********/
+
+
+/********** TEXTBOX ********/
+.normalTextBox {
+    background-color: #1d1d1d;
+    color: #e3a21a;
+    border: 1px solid gray;
+    line-height: 22px;
+}
+
+    .normalTextBox:focus {
+        border: 1px solid #e3a21a;
+    }
+
+.normalTextArea {
+    resize: none;
+    background-color: #1d1d1d;
+    color: #e3a21a;
+    border: 1px solid gray;
+    line-height: 22px;
+    height: 111px;
+    margin-top: 5px;
+}
+
+    .normalTextArea:focus {
+        border: 1px solid #e3a21a;
+    }

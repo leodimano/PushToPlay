@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PushToPlayStoreContainer" CdmEntityContainer="PushToPlayContext">
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlay.User)">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GameSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlay.Game)">
+        <MappingFragment StoreEntitySet="GameSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Deck" ColumnName="Deck" />
+          <ScalarProperty Name="GiantBombID" ColumnName="GiantBombID" />
+          <ScalarProperty Name="IconImageUrl" ColumnName="IconImageUrl" />
+          <ScalarProperty Name="MediumImageUrl" ColumnName="MediumImageUrl" />
+          <ScalarProperty Name="Aliases" ColumnName="Aliases" />
+          <ScalarProperty Name="MetacriticScore" ColumnName="MetacriticScore" />
+          <ScalarProperty Name="MetacriticUrl" ColumnName="MetacriticUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlay.Group)">
+        <MappingFragment StoreEntitySet="GroupSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlay.Event)">
+        <MappingFragment StoreEntitySet="EventSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlay.Message)">
+        <MappingFragment StoreEntitySet="MessageSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SteamUserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlay.SteamUser)">
+        <MappingFragment StoreEntitySet="SteamUserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SteamGameSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlay.SteamGame)">
+        <MappingFragment StoreEntitySet="SteamGameSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SteamAppID" ColumnName="SteamAppID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlatformSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PushToPlay.Platform)">
+        <MappingFragment StoreEntitySet="PlatformSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+          <ScalarProperty Name="GiantBombID" ColumnName="GiantBombID" />
+          <ScalarProperty Name="MediumImageUrl" ColumnName="MediumImageUrl" />
+          <ScalarProperty Name="IconImageUrl" ColumnName="IconImageUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SteamUserSteamGame" TypeName="PushToPlay.SteamUserSteamGame" StoreEntitySet="SteamUserSteamGame">
+      <EndProperty Name="SteamUser">
+        <ScalarProperty Name="Id" ColumnName="SteamUser_Id" />
+      </EndProperty>
+      <EndProperty Name="SteamGame">
+        <ScalarProperty Name="Id" ColumnName="SteamGame_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserGame" TypeName="PushToPlay.UserGame" StoreEntitySet="UserGame">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Game">
+        <ScalarProperty Name="Id" ColumnName="Game_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="GroupGame" TypeName="PushToPlay.GroupGame" StoreEntitySet="GroupGame">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+      </EndProperty>
+      <EndProperty Name="Game">
+        <ScalarProperty Name="Id" ColumnName="Game_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserMessage" TypeName="PushToPlay.UserMessage" StoreEntitySet="MessageSet">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Message">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="User_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="GameMessage" TypeName="PushToPlay.GameMessage" StoreEntitySet="MessageSet">
+      <EndProperty Name="Game">
+        <ScalarProperty Name="Id" ColumnName="Game_Id" />
+      </EndProperty>
+      <EndProperty Name="Message">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Game_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EventMessage" TypeName="PushToPlay.EventMessage" StoreEntitySet="MessageSet">
+      <EndProperty Name="Event">
+        <ScalarProperty Name="Id" ColumnName="Event_Id" />
+      </EndProperty>
+      <EndProperty Name="Message">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Event_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="GroupMessage" TypeName="PushToPlay.GroupMessage" StoreEntitySet="MessageSet">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+      </EndProperty>
+      <EndProperty Name="Message">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Group_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="GroupEvent" TypeName="PushToPlay.GroupEvent" StoreEntitySet="EventSet">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+      </EndProperty>
+      <EndProperty Name="Event">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Group_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserEvent" TypeName="PushToPlay.UserEvent" StoreEntitySet="EventSet">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Event">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="User_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="GroupUser" TypeName="PushToPlay.GroupUser" StoreEntitySet="GroupUser">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserSteamUser" TypeName="PushToPlay.UserSteamUser" StoreEntitySet="SteamUserSet">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="SteamUser">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserPlatform" TypeName="PushToPlay.UserPlatform" StoreEntitySet="UserPlatform">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Platform">
+        <ScalarProperty Name="Id" ColumnName="Platform_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="GamePlatform" TypeName="PushToPlay.GamePlatform" StoreEntitySet="GamePlatform">
+      <EndProperty Name="Game">
+        <ScalarProperty Name="Id" ColumnName="Game_Id" />
+      </EndProperty>
+      <EndProperty Name="Platform">
+        <ScalarProperty Name="Id" ColumnName="Platform_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SteamGameGame" TypeName="PushToPlay.SteamGameGame" StoreEntitySet="GameSet">
+      <EndProperty Name="SteamGame">
+        <ScalarProperty Name="Id" ColumnName="SteamGame_Id" />
+      </EndProperty>
+      <EndProperty Name="Game">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

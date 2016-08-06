@@ -1,0 +1,31 @@
+﻿@using PushToPlay.Model.LoL;
+@using PushToPlay.Core.PlatformFactory.LoL;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var _champion in LoLFactory.Instance.GetChampionList("br").OrderBy(c => c.name))
+{
+    <div class="leftItem">
+        <a href="@Url.Action("champion", "lol", new { id = _champion.name.ToLower() })">
+            <img src="@_champion.image.image_path"/>
+        </a>
+    </div>        
+}
+
+
+@foreach (var _item in LoLFactory.Instance.GetItemList("br"))
+{
+    if (_item.gold.purchasable)
+    {
+    <div class="leftItem">
+        <img src="@_item.image.image_path"/>
+    </div>      
+    }
+}
+
+
+
+

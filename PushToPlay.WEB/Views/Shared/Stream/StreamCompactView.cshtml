@@ -1,0 +1,57 @@
+﻿@using PushToPlay.WEB;
+
+@model PushToPlay.WEB.Models.StreamCompactViewModel
+
+<div style="padding-right: 10px; padding-bottom: 10px">
+    <div class="displayAreaColor">
+        <table class="no-border no-padding no-margin">
+            <tr>
+                <td class="no-border no-padding no-margin">
+                    <div style="padding: 10px;">
+                        <a href="">
+                            <img src="@Model.ChannelImage" style="width:100px;height:100px;" class="border-color borderColorStrong"/>
+                        </a>
+                    </div>
+                </td>
+                <td style="width: 100%; vertical-align: top" class="no-border no-padding no-margin">
+                    <div style="padding-top: 10px; padding-bottom: 5px; padding-right: 5px; text-overflow: ellipsis; overflow: hidden; width: 333px; white-space: nowrap">
+                        <a href="">
+                            <h3 class="fieldText no-margin">@Model.ChannelName</h3>
+                        </a>
+                    </div>
+                    <div class="contentColor" style="height: 1px;"></div>
+                    <div style="padding-top: 5px;">
+                        <span class="fieldTextStrong">@Model.ChannelDescription</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="contentColor" style="height: 1px;"></div>
+        <div style="padding-top: 5px; padding-left: 10px; padding-bottom: 5px">
+            <div class="leftItem" style="margin-right: 10px;">
+                <div style="text-align: center">
+                    <i class="icon-user fieldTextStrong"></i>
+                </div>
+                <div style="text-align: center">
+                    <span class="fieldTextStrong">@Model.ChannelFollowers</span>
+                </div>
+            </div>
+            <div class="leftItem" style="margin-right: 10px;">
+                <div style="text-align: center">
+                    <i class="icon-eye fieldTextStrong"></i>
+                </div>
+                <div style="text-align: center">
+                    <span class="fieldTextStrong">@Model.StreamViewers</span>
+                </div>
+            </div>
+            <div style="padding-right: 7px; padding-top: 2px; display: inline-block; float: right">
+                <a href="@Url.RouteUrl("GameHome_Streams_Watch", new { id = Model.ObjectId, gamename = WebHelper.ProcessUrlEnconding(Model.ObjectName), streamid = WebHelper.ProcessUrlEnconding(Model.ChannelName) })">
+                    <button class="no-padding no-margin buttonOkNoMargin">
+                        <i class="icon-play"></i>
+                        Assistir
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>   
+</div>

@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamKit2", "SteamKit2\SteamKit2.csproj", "{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushToPlay.Helpers", "PushToPlay.Helpers\PushToPlay.Helpers.csproj", "{A2BDC786-F676-4482-BCF8-A492BA4B47CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushToPlay.Core", "PushToPlay.Core\PushToPlay.Core.csproj", "{C853E4B4-2D8B-4AB2-A32A-E64B9811AA39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushToPlay.Model", "PushToPlay.Model\PushToPlay.Model.csproj", "{77842639-BF2F-41C8-84EF-6C2594E9B5DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushToPlay.WEB", "PushToPlay.WEB\PushToPlay.WEB.csproj", "{5A71B731-2BA8-445F-AC4B-522C13DD0A0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushToPlay.WinForm", "PushToPlay.WinForm\PushToPlay.WinForm.csproj", "{9D8A4667-FA90-4BC0-8A25-FF7085F978C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Geral", "Geral", "{164DC4D7-B2DC-466D-9C58-B1BF28D2E3D4}"
+	ProjectSection(SolutionItems) = preProject
+		ChangeLog.txt = ChangeLog.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{43F975A7-5F08-4FF9-9759-A7CCC0466342}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://pushtoplay.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PushToPlay.Core\\PushToPlay.Core.csproj
+		SccProjectName1 = PushToPlay.Core
+		SccLocalPath1 = PushToPlay.Core
+		SccProjectUniqueName2 = PushToPlay.Helpers\\PushToPlay.Helpers.csproj
+		SccProjectName2 = PushToPlay.Helpers
+		SccLocalPath2 = PushToPlay.Helpers
+		SccProjectUniqueName3 = PushToPlay.Model\\PushToPlay.Model.csproj
+		SccProjectName3 = PushToPlay.Model
+		SccLocalPath3 = PushToPlay.Model
+		SccProjectUniqueName4 = PushToPlay.WEB\\PushToPlay.WEB.csproj
+		SccProjectName4 = PushToPlay.WEB
+		SccLocalPath4 = PushToPlay.WEB
+		SccProjectUniqueName5 = PushToPlay.WinForm\\PushToPlay.WinForm.csproj
+		SccProjectName5 = PushToPlay.WinForm
+		SccLocalPath5 = PushToPlay.WinForm
+		SccProjectUniqueName6 = SteamKit2\\SteamKit2.csproj
+		SccProjectName6 = SteamKit2
+		SccLocalPath6 = SteamKit2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2BDC786-F676-4482-BCF8-A492BA4B47CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2BDC786-F676-4482-BCF8-A492BA4B47CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2BDC786-F676-4482-BCF8-A492BA4B47CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2BDC786-F676-4482-BCF8-A492BA4B47CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C853E4B4-2D8B-4AB2-A32A-E64B9811AA39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C853E4B4-2D8B-4AB2-A32A-E64B9811AA39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C853E4B4-2D8B-4AB2-A32A-E64B9811AA39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C853E4B4-2D8B-4AB2-A32A-E64B9811AA39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77842639-BF2F-41C8-84EF-6C2594E9B5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77842639-BF2F-41C8-84EF-6C2594E9B5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77842639-BF2F-41C8-84EF-6C2594E9B5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77842639-BF2F-41C8-84EF-6C2594E9B5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A71B731-2BA8-445F-AC4B-522C13DD0A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A71B731-2BA8-445F-AC4B-522C13DD0A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A71B731-2BA8-445F-AC4B-522C13DD0A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A71B731-2BA8-445F-AC4B-522C13DD0A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D8A4667-FA90-4BC0-8A25-FF7085F978C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D8A4667-FA90-4BC0-8A25-FF7085F978C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D8A4667-FA90-4BC0-8A25-FF7085F978C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D8A4667-FA90-4BC0-8A25-FF7085F978C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

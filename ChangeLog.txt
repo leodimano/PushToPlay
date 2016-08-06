@@ -1,0 +1,30 @@
+19/09/2013
+Leonardo Dimano
+
+- DataBase : Tabela UserGame criada para associar usuários a jogos
+- WinForm : Interface adaptada para agrupar as funcionalidades por grupos
+- Engine: Criado suporte para a API do steam para buscar jogos dos usuarios por SteamID
+
+
+Erros conhecidos
+- Engine: Corrigir a interface de importação de jogos do steam para fazer a comparação via Aliases do GB
+- Engine: Corrigir a interface de importação de jogos do steam para remover textos entre parenteses por 
+	      exemplo "Company of Heroes (Steam version)" para "Company of Heroes"
+
+TODO List
+- Engine: Importar informações do usuário steam (jogos, amigos e achievments)
+- MVC: Criar funcionalidade de cadastro
+- MVC: Criar funcionalidade de login
+- MVC: Criar funcionalidade de login/cadastro via steam
+- MVC: Criar Home
+- MVC-Game: Criar profile
+- MVC-User: Criar profile
+- MVC-User: Criar pagina de gerenciamento de clans
+- MVC-User: Criar pagina de gerenciamento de jogos
+- MVC-User: Criar pagina de gerenciamento de grupos
+- MVC-User: Criar pagina de gerenciamento de eventos
+- MVC-Clan: Criar profile
+- MVC-Clan: Criar pagina de gerenciamento de usuarios
+- MVC-Clan: Criar pagina de gerenciamento de grupos
+- MVC-Clan: Criar pagina de gerenciamento de Eventos
+- MVC-Clan: Criar pagina de gerenciamento de jogos

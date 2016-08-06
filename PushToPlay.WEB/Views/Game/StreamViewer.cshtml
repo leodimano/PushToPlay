@@ -1,0 +1,11 @@
+﻿@model PushToPlay.WEB.Models.GameStreamViewerViewModel
+
+@{
+    Layout = "~/Views/Shared/Game/_LayoutGameProfile.cshtml";
+}
+
+@section content{
+    <div style="padding-top:10px;padding-bottom:7px;padding-left:10px;" class="displayAreaColor">
+        @{Html.RenderPartial("TwitchStreamViewer", Model.TwitchStreamViewerModel);}
+    </div>
+}

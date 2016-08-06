@@ -1,0 +1,43 @@
+﻿@model PushToPlay.WEB.Models.UserLoginViewModel
+
+<div id="loginAjax">
+    <div style="margin: 0px auto 0px auto; width: 25%">
+        <div style="padding: 10px; float: left;">
+            <div style="padding-left: 10px; padding-top: 5px; padding-right: 10px; padding-bottom: 10px;" class="displayAreaColor">
+                <h3 class="fieldText">Entrar</h3>
+                <div class="contentColor" style="height: 1px; margin-right: -10px; margin-left: -10px;"></div>
+                @if (Model != null && !string.IsNullOrWhiteSpace(Model.ModelErrorMsg))
+                {
+                    <div>
+                        <span class="errorTextStrong">@Model.ModelErrorMsg</span>
+                    </div>
+                    Model.ModelErrorMsg = string.Empty;
+                }
+                <div class="controlSeparator">
+                    <div>
+                        @Html.LabelFor(m => m.UserName, new { @class = "fieldTextStrong" })
+                    </div>
+                    <div class="controlSeparator">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "normalTextBox caixatexto" })
+                    </div>
+                </div>
+                <div class="marginTop10">
+                    <div>
+                        @Html.LabelFor(m => m.Password, new { @class = "fieldTextStrong" })
+                    </div>
+                    <div class="controlSeparator">
+                        @Html.PasswordFor(m => m.Password, new { @class = "normalTextBox caixatexto" })
+                    </div>
+                </div>
+
+                <div class="marginTop10">
+                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "fieldTextStrong" })
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "fieldTextStrong" })
+                </div>
+                <div class="marginTop10" style="text-align: right">
+                    <button type="submit" class="buttonOkNoMargin">Entrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

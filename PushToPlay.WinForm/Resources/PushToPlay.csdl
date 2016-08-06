@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="PushToPlay" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="PushToPlayContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UserSet" EntityType="PushToPlay.User" />
+    <EntitySet Name="GameSet" EntityType="PushToPlay.Game" />
+    <EntitySet Name="GroupSet" EntityType="PushToPlay.Group" />
+    <EntitySet Name="EventSet" EntityType="PushToPlay.Event" />
+    <EntitySet Name="MessageSet" EntityType="PushToPlay.Message" />
+    <EntitySet Name="SteamUserSet" EntityType="PushToPlay.SteamUser" />
+    <EntitySet Name="SteamGameSet" EntityType="PushToPlay.SteamGame" />
+    <AssociationSet Name="SteamUserSteamGame" Association="PushToPlay.SteamUserSteamGame">
+      <End Role="SteamUser" EntitySet="SteamUserSet" />
+      <End Role="SteamGame" EntitySet="SteamGameSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserGame" Association="PushToPlay.UserGame">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Game" EntitySet="GameSet" />
+    </AssociationSet>
+    <AssociationSet Name="GroupGame" Association="PushToPlay.GroupGame">
+      <End Role="Group" EntitySet="GroupSet" />
+      <End Role="Game" EntitySet="GameSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserMessage" Association="PushToPlay.UserMessage">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Message" EntitySet="MessageSet" />
+    </AssociationSet>
+    <AssociationSet Name="GameMessage" Association="PushToPlay.GameMessage">
+      <End Role="Game" EntitySet="GameSet" />
+      <End Role="Message" EntitySet="MessageSet" />
+    </AssociationSet>
+    <AssociationSet Name="EventMessage" Association="PushToPlay.EventMessage">
+      <End Role="Event" EntitySet="EventSet" />
+      <End Role="Message" EntitySet="MessageSet" />
+    </AssociationSet>
+    <AssociationSet Name="GroupMessage" Association="PushToPlay.GroupMessage">
+      <End Role="Group" EntitySet="GroupSet" />
+      <End Role="Message" EntitySet="MessageSet" />
+    </AssociationSet>
+    <AssociationSet Name="GroupEvent" Association="PushToPlay.GroupEvent">
+      <End Role="Group" EntitySet="GroupSet" />
+      <End Role="Event" EntitySet="EventSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserEvent" Association="PushToPlay.UserEvent">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Event" EntitySet="EventSet" />
+    </AssociationSet>
+    <AssociationSet Name="GroupUser" Association="PushToPlay.GroupUser">
+      <End Role="Group" EntitySet="GroupSet" />
+      <End Role="User" EntitySet="UserSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserSteamUser" Association="PushToPlay.UserSteamUser">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="SteamUser" EntitySet="SteamUserSet" />
+    </AssociationSet>
+    <EntitySet Name="PlatformSet" EntityType="PushToPlay.Platform" />
+    <AssociationSet Name="UserPlatform" Association="PushToPlay.UserPlatform">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Platform" EntitySet="PlatformSet" />
+    </AssociationSet>
+    <AssociationSet Name="GamePlatform" Association="PushToPlay.GamePlatform">
+      <End Role="Game" EntitySet="GameSet" />
+      <End Role="Platform" EntitySet="PlatformSet" />
+    </AssociationSet>
+    <AssociationSet Name="SteamGameGame" Association="PushToPlay.SteamGameGame">
+      <End Role="SteamGame" EntitySet="SteamGameSet" />
+      <End Role="Game" EntitySet="GameSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Game" Relationship="PushToPlay.UserGame" FromRole="User" ToRole="Game" />
+    <NavigationProperty Name="Message" Relationship="PushToPlay.UserMessage" FromRole="User" ToRole="Message" />
+    <NavigationProperty Name="Event" Relationship="PushToPlay.UserEvent" FromRole="User" ToRole="Event" />
+    <NavigationProperty Name="Group" Relationship="PushToPlay.GroupUser" FromRole="User" ToRole="Group" />
+    <NavigationProperty Name="SteamUser" Relationship="PushToPlay.UserSteamUser" FromRole="User" ToRole="SteamUser" />
+    <NavigationProperty Name="Platform" Relationship="PushToPlay.UserPlatform" FromRole="User" ToRole="Platform" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Game">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="User" Relationship="PushToPlay.UserGame" FromRole="Game" ToRole="User" />
+    <NavigationProperty Name="Group" Relationship="PushToPlay.GroupGame" FromRole="Game" ToRole="Group" />
+    <NavigationProperty Name="Message" Relationship="PushToPlay.GameMessage" FromRole="Game" ToRole="Message" />
+    <NavigationProperty Name="Platform" Relationship="PushToPlay.GamePlatform" FromRole="Game" ToRole="Platform" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Deck" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="Int64" Name="GiantBombID" Nullable="false" />
+    <Property Type="String" Name="IconImageUrl" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="MediumImageUrl" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Aliases" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="MetacriticScore" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="MetacriticUrl" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="SteamGame" Relationship="PushToPlay.SteamGameGame" FromRole="Game" ToRole="SteamGame" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="PushToPlay.GroupType" Name="GroupType" Nullable="false" />
+    <NavigationProperty Name="Game" Relationship="PushToPlay.GroupGame" FromRole="Group" ToRole="Game" />
+    <NavigationProperty Name="Message" Relationship="PushToPlay.GroupMessage" FromRole="Group" ToRole="Message" />
+    <NavigationProperty Name="Event" Relationship="PushToPlay.GroupEvent" FromRole="Group" ToRole="Event" />
+    <NavigationProperty Name="User" Relationship="PushToPlay.GroupUser" FromRole="Group" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Message" Relationship="PushToPlay.EventMessage" FromRole="Event" ToRole="Message" />
+    <NavigationProperty Name="Group" Relationship="PushToPlay.GroupEvent" FromRole="Event" ToRole="Group" />
+    <NavigationProperty Name="User" Relationship="PushToPlay.UserEvent" FromRole="Event" ToRole="User" />
+  </EntityType>
+  <EnumType Name="GroupType">
+    <Member Name="Group" Value="0" />
+    <Member Name="Clan" Value="1" />
+  </EnumType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="User" Relationship="PushToPlay.UserMessage" FromRole="Message" ToRole="User" />
+    <NavigationProperty Name="Game" Relationship="PushToPlay.GameMessage" FromRole="Message" ToRole="Game" />
+    <NavigationProperty Name="Event" Relationship="PushToPlay.EventMessage" FromRole="Message" ToRole="Event" />
+    <NavigationProperty Name="Group" Relationship="PushToPlay.GroupMessage" FromRole="Message" ToRole="Group" />
+    <Property Type="PushToPlay.MessageType" Name="MessageType" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SteamUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="SteamGame" Relationship="PushToPlay.SteamUserSteamGame" FromRole="SteamUser" ToRole="SteamGame" />
+    <NavigationProperty Name="User" Relationship="PushToPlay.UserSteamUser" FromRole="SteamUser" ToRole="User" />
+  </EntityType>
+  <EntityType Name="SteamGame">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="SteamUser" Relationship="PushToPlay.SteamUserSteamGame" FromRole="SteamGame" ToRole="SteamUser" />
+    <Property Type="String" Name="SteamAppID" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Game" Relationship="PushToPlay.SteamGameGame" FromRole="SteamGame" ToRole="Game" />
+  </EntityType>
+  <Association Name="SteamUserSteamGame">
+    <End Type="PushToPlay.SteamUser" Role="SteamUser" Multiplicity="*" />
+    <End Type="PushToPlay.SteamGame" Role="SteamGame" Multiplicity="*" />
+  </Association>
+  <Association Name="UserGame">
+    <End Type="PushToPlay.User" Role="User" Multiplicity="*" />
+    <End Type="PushToPlay.Game" Role="Game" Multiplicity="*" />
+  </Association>
+  <Association Name="GroupGame">
+    <End Type="PushToPlay.Group" Role="Group" Multiplicity="*" />
+    <End Type="PushToPlay.Game" Role="Game" Multiplicity="*" />
+  </Association>
+  <Association Name="UserMessage">
+    <End Type="PushToPlay.User" Role="User" Multiplicity="0..1" />
+    <End Type="PushToPlay.Message" Role="Message" Multiplicity="*" />
+  </Association>
+  <Association Name="GameMessage">
+    <End Type="PushToPlay.Game" Role="Game" Multiplicity="0..1" />
+    <End Type="PushToPlay.Message" Role="Message" Multiplicity="*" />
+  </Association>
+  <Association Name="EventMessage">
+    <End Type="PushToPlay.Event" Role="Event" Multiplicity="0..1" />
+    <End Type="PushToPlay.Message" Role="Message" Multiplicity="*" />
+  </Association>
+  <Association Name="GroupMessage">
+    <End Type="PushToPlay.Group" Role="Group" Multiplicity="0..1" />
+    <End Type="PushToPlay.Message" Role="Message" Multiplicity="*" />
+  </Association>
+  <Association Name="GroupEvent">
+    <End Type="PushToPlay.Group" Role="Group" Multiplicity="0..1" />
+    <End Type="PushToPlay.Event" Role="Event" Multiplicity="*" />
+  </Association>
+  <Association Name="UserEvent">
+    <End Type="PushToPlay.User" Role="User" Multiplicity="0..1" />
+    <End Type="PushToPlay.Event" Role="Event" Multiplicity="*" />
+  </Association>
+  <Association Name="GroupUser">
+    <End Type="PushToPlay.Group" Role="Group" Multiplicity="*" />
+    <End Type="PushToPlay.User" Role="User" Multiplicity="*" />
+  </Association>
+  <Association Name="UserSteamUser">
+    <End Type="PushToPlay.User" Role="User" Multiplicity="1" />
+    <End Type="PushToPlay.SteamUser" Role="SteamUser" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Platform">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="User" Relationship="PushToPlay.UserPlatform" FromRole="Platform" ToRole="User" />
+    <NavigationProperty Name="Game" Relationship="PushToPlay.GamePlatform" FromRole="Platform" ToRole="Game" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Abbreviation" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="Int64" Name="GiantBombID" Nullable="false" />
+    <Property Type="String" Name="MediumImageUrl" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="IconImageUrl" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <Association Name="UserPlatform">
+    <End Type="PushToPlay.User" Role="User" Multiplicity="*" />
+    <End Type="PushToPlay.Platform" Role="Platform" Multiplicity="*" />
+  </Association>
+  <Association Name="GamePlatform">
+    <End Type="PushToPlay.Game" Role="Game" Multiplicity="*" />
+    <End Type="PushToPlay.Platform" Role="Platform" Multiplicity="*" />
+  </Association>
+  <EnumType Name="MessageType">
+    <Member Name="Message" Value="0" />
+    <Member Name="Review" Value="1" />
+  </EnumType>
+  <Association Name="SteamGameGame">
+    <End Type="PushToPlay.SteamGame" Role="SteamGame" Multiplicity="1" />
+    <End Type="PushToPlay.Game" Role="Game" Multiplicity="0..1" />
+  </Association>
+</Schema>

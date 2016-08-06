@@ -1,0 +1,81 @@
+﻿@model PushToPlay.Model.LoL.LoLChampion
+
+@{
+    ViewBag.Title = "Champion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="padding-left: 10px; padding-top: 10px; padding-right: 10px;">
+    <div class="displayAreaColor">
+        <!-- image div -->
+        <div class="leftItem displayAreaColor profilePanelImageCell">
+            <img src="@Model.image.image_path" class="border-color" />
+        </div>
+        <!-- content div -->
+        <div class="leftItem displayAreaColor lolChampionPanelDataCell" style="display: inline-block">
+            <h2 class="fieldText no-margin">@Model.name</h2>
+            <small class="fieldTextStrong" style="margin-left: 5px;">@Model.title</small>
+            <div class="contentColor" style="height: 1px; margin-right: 0px;"></div>
+            <div>
+                <div style="margin-top: 7px; margin-bottom: 7px; margin-left: 5px;">
+                    @foreach (var _tag in Model.tags)
+                    {
+                        <span class="fieldTextStrong">@_tag</span>
+                    }
+                    <div class="clearBoth"></div>
+                    <div class="leftItem">                        
+                        <div class="leftItem lolChampionStats">
+                            <span class="fieldText">Vida</span>
+                            <br />
+                            <span class="fieldTextStrong">@Model.stats.hp (+@Model.stats.hpperlevel por nivel)</span>
+                        </div>
+                        <div class="leftItem lolChampionStatsRight">
+                            <span class="fieldText">Regeneracao de Vida</span>
+                            <br />
+                            <span class="fieldTextStrong">@Model.stats.hpregen (+@Model.stats.hpregenperlevel por nivel)</span>
+                        </div>
+                        <div class="clearBoth"></div>
+                        <div class="leftItem lolChampionStats">
+                            <span class="fieldText">Dano de Ataque</span>
+                            <br />
+                            <span class="fieldTextStrong">@Model.stats.attackdamage (+@Model.stats.attackdamageperlevel por nivel)</span>
+                        </div>
+                        <div class="leftItem lolChampionStatsRight">
+                            <span class="fieldText">Armadura</span>
+                            <br />
+                            <span class="fieldTextStrong">@Model.stats.armor (+@Model.stats.armorperlevel por nivel)</span>
+                        </div>
+                        <div class="clearBoth"></div>
+                        <div class="leftItem lolChampionStats">
+                            <span class="fieldText">Velocidade de Ataque</span>
+                            <br />
+                            <span class="fieldTextStrong">@Model.stats.attackspeedoffset (+@Model.stats.attackspeedperlevel% por nivel)</span>
+                        </div>
+                        <div class="leftItem lolChampionStatsRight">
+                            <span class="fieldText">Resistencia Magica</span>
+                            <br />
+                            <span class="fieldTextStrong">@Model.stats.spellblock (+@Model.stats.spellblockperlevel por nivel)</span>
+                        </div>
+                        <div class="clearBoth"></div>
+                    </div>
+                    <div class="leftItem" style="vertical-align:top;margin-top:10px;margin-left:26px;">
+                        <img src="@Model.passive.image.image_path" style="margin-right:15px;"/> 
+                        <img src="@Model.spells[0].image.image_path" style="margin-right:15px;"/>
+                        <img src="@Model.spells[1].image.image_path" style="margin-right:15px;"/>
+                        <img src="@Model.spells[2].image.image_path" style="margin-right:15px;"/>
+                        <img src="@Model.spells[3].image.image_path" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearBoth"></div>
+        <div class="contentColor" style="height: 1px; margin-right: -10px; margin-left: -10px;">
+        </div>
+        <div style="padding-left: 10px; padding-top: 7px; padding-right: 10px; padding-bottom: 7px;">
+            <div>
+                <span class="fieldTextStrong">@Html.Raw(Model.lore)</span>
+            </div>
+        </div>
+    </div>
+</div>
+

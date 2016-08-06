@@ -1,0 +1,60 @@
+﻿@using PushToPlay.WEB;
+@using PushToPlay.WEB.Helper;
+@model PushToPlay.WEB.Models.GroupSearchViewModel
+
+@{
+    ViewBag.Title = "Push To Play - Grupos";
+    Layout = "~/Views/Shared/_LayoutSide.cshtml";
+}
+
+@section SectionSideBar{
+    <div class="displayAreaColor" style="padding-top: 5px; padding-bottom: 2px; padding-left: 10px; padding-right: 10px;">
+        <div class="leftItem" style="padding-top: 3px; padding-bottom: 5px;">
+            <span class="fieldTextStrong">Buscar por</span>
+            <span class="fieldText">Grupos</span>
+        </div>
+        <div class="leftItem" style="padding-top: 3px; padding-bottom: 5px; margin-left: 5px;">
+            @Html.TextBox("txtSearch", string.Empty, new { @class = "normalTextBox" })
+        </div>
+        <div class="leftItem" style="padding-top: 3px; padding-bottom: 5px; margin-left: 5px; vertical-align: top; margin-right: 10px;">
+            <button id="btnSearch" class="buttonSearch">Buscar</button>
+        </div>
+        @if (Model.LoggedUser != null)
+        {
+            <div class="rightItem" style="margin-top: 5px;">
+                <small>
+                    <span class="fieldTextStrong">Não encontrou um grupo que se encaixe com você? </span><a href="@Url.RouteUrl(Constants.ROUTE_GROUP_CREATE)">Crie seu próprio grupo</a>
+                </small>
+            </div>
+        }
+        <div class="clearBoth"></div>
+    </div>
+}
+
+@section SectionContent{
+
+    <div id="SearchContent">
+        @if (Model.ObjectCount > 0)
+        {
+            foreach (var _groupCompactViewModel in Model.ListGroupCompactViewModel)
+            {
+            <div id="@_groupCompactViewModel.AjaxDivContent" class="leftItem">
+                @{Html.RenderPartial("GroupCompactView", _groupCompactViewModel);}
+            </div>
+            }
+
+            if (Model.TotalPage > 1)
+            {
+            <div style="text-align: center;">
+                @Html.PushToPlayPager(Model.TotalPage, Model.CurrentPage)
+            </div>            
+            }
+        }
+    </div>
+
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/Views/Group/Search.js")
+    @Scripts.Render("~/Scripts/Views/Group/GroupActions.js")
+}

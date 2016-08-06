@@ -1,0 +1,80 @@
+﻿@using System.ServiceModel.Syndication;
+@using PushToPlay.WEB.Helper;
+@using PushToPlay.WEB.Models;
+
+@model RssFeedModel
+
+@{
+    DateTime gameDateTimeNews = DateTime.MinValue;
+}
+
+<div style="padding-top: 5px;">
+    <h3 class="fieldText" style="margin-left: 10px;">@Model.FeedTitle</h3>
+    <div class="contentColor" style="height: 1px; margin-right: -10px; margin-left: -10px;"></div>
+    <div class="displayAreaColor divFeedContainer" style="height: @Model.FeedHeight; overflow-y: auto;">
+
+            @switch (Model.FeedType)
+            {
+                case FeedType.NewsFeed:        
+            
+                <table>
+                    @foreach (RssFeedModelItem _feedItem in Model.FeedItems)
+                    {
+                        if (gameDateTimeNews == DateTime.MinValue ||
+                            gameDateTimeNews != _feedItem.PublishDate)
+                        {
+                            gameDateTimeNews = _feedItem.PublishDate;
+                        <tr>
+                            <td class="no-border">
+                                <span class="fieldTextUnderline">@gameDateTimeNews.ToString("dd/MM/yyyy")</span>
+                            </td>
+                        </tr>            
+                        }
+                        <tr>
+                            <td class="no-border">
+                                <a href="@_feedItem.Link" class="RSSItem" target="_blank">
+                                    <span>@_feedItem.Title</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>            
+    
+                    break;
+                case FeedType.SteamPromoFeed:
+                case FeedType.NuuvemPromoFeed:
+
+                    for(int i =0; i <= Model.FeedItems.Count() - 1; i++)
+                    {
+                        string _itemClass = string.Empty;
+
+                        if (i < Model.FeedItems.Count() - 1)
+                        {
+                            _itemClass = "divFeedItem";
+                        }
+                        
+                        var _feedItem = Model.FeedItems[i];
+                        
+                        <div class="@_itemClass">
+                            <a href="@_feedItem.Link" target="_blank">
+                                <img src="@_feedItem.ImagePath" class="imgFeedItem" title="@_feedItem.Title" 
+                                            data-feed-title="@_feedItem.Title" 
+                                            data-feed-percent="@_feedItem.Description" 
+                                            data-feed-price="@_feedItem.Price" 
+                                            data-feed-discount-price="@_feedItem.DiscountPrice"
+                                            data-feed-platform="@Convert.ToInt32(Model.FeedType)"
+                                            />
+                            </a>
+                        </div>                    
+                    }
+                    break;
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+
+}

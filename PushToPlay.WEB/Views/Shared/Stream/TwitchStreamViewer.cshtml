@@ -1,0 +1,23 @@
+﻿@model PushToPlay.WEB.Models.TwitchStreamViewerViewModel
+
+
+<div>
+    <object type="application/x-shockwave-flash"
+                height="420"
+                width="670"
+                id="live_embed_player_flash"
+                data="@string.Format("http://www.twitch.tv/widgets/live_embed_player.swf?channel={0}", Model.StreamKey)"
+                bgcolor="#000000">
+        <param name="allowFullScreen" value="true" />
+        <param name="allowScriptAccess" value="always" />
+        <param name="allowNetworking" value="all" />
+        <param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" />
+        <param name="flashvars" value="@string.Format("hostname=www.twitch.tv&channel={0}&auto_play=true&start_volume=25", Model.StreamKey)" />
+    </object>
+    <iframe frameborder="0"
+                scrolling="no"
+                id="chat_embed"
+                src="@string.Format("http://twitch.tv/chat/embed?channel={0}&amp;popout_chat=true", Model.StreamKey)"
+                height="420"
+                width="250"></iframe>
+</div>

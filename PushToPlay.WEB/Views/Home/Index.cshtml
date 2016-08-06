@@ -1,0 +1,56 @@
+﻿@model PushToPlay.WEB.Models.HomeViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="no-border no-padding no-margin" style="border-spacing: 10px">
+    <tr>
+        <td class="displayAreaColor no-border no-padding" colspan="2" style="text-align: center; width: 624px;">
+            <div class=" fieldTextStrong">Area banner</div>
+        </td>
+        <td rowspan="2" class="displayAreaColor no-border no-padding" style="width: 306px">
+            @{Html.RenderPartial("FeedView", Model.GameNewsFeed);}
+        </td>
+    </tr>
+    <tr>
+        <td class="displayAreaColor no-border no-padding" style="width: 306px">
+            <div class="fieldTextStrong" style="text-align: center;">Últimas atividades Grupos?</div>
+        </td>
+        <td class="displayAreaColor no-border no-padding" style="width: 306px">
+            <div class="fieldTextStrong" style="text-align: center;">Últimas atividades Clans?</div>
+        </td>
+    </tr>
+    <tr>
+        <td class="displayAreaColor no-border no-padding" style="width: 306px;">
+            <div class="fieldTextStrong" style="text-align: center; width: 306px">Últimas atividades Eventos?</div>
+        </td>
+        <td class="displayAreaColor no-border no-padding" rowspan="2" style="width: 306px;">
+            @if (Model.NuuvemPromoFeeds != null)
+            {
+                <div class="fieldTextStrong">@{Html.RenderPartial("FeedView", Model.NuuvemPromoFeeds);}</div>
+            }
+        </td>
+
+        <td class="displayAreaColor no-border no-padding" rowspan="2" style="width: 306px;">
+            @if (Model.SteamPromoFeeds != null)
+            {
+                <div class="fieldTextStrong">@{Html.RenderPartial("FeedView", Model.SteamPromoFeeds);}</div>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td class="displayAreaColor no-border no-padding" style="width: 306px;">
+            <div class="fieldTextStrong" style="text-align: center;">
+                Últimas atividades Jogos?
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/Views/Home/Index.js")
+    @Scripts.Render("~/Scripts/Views/Feed/FeedView.js")
+}
