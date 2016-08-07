@@ -18,8 +18,8 @@ namespace PushToPlay.Model
         {
             this.Events = new HashSet<Event>();
             this.UserGames = new HashSet<UserGame>();
-            this.RelationFriends = new HashSet<RelationFriend>();
-            this.RelationFriends1 = new HashSet<RelationFriend>();
+            this.RELATIONFRIEND = new HashSet<RelationFriend>();
+            this.RELATIONFRIEND1 = new HashSet<RelationFriend>();
             this.UserGroups = new HashSet<UserGroups>();
         }
     
@@ -39,8 +39,8 @@ namespace PushToPlay.Model
     
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<UserGame> UserGames { get; set; }
-        public virtual ICollection<RelationFriend> RelationFriends { get; set; }
-        public virtual ICollection<RelationFriend> RelationFriends1 { get; set; }
+        public virtual ICollection<RelationFriend> RELATIONFRIEND { get; set; }
+        public virtual ICollection<RelationFriend> RELATIONFRIEND1 { get; set; }
         public virtual ICollection<UserGroups> UserGroups { get; set; }
     }
 }

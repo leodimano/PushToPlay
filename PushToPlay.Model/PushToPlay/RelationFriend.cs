@@ -12,10 +12,10 @@ namespace PushToPlay.Model
 
         NotFriend = 0,
 
-        Asked     = 1,
-        Pending   = 2,
+        Asked = 1,
+        Pending = 2,
 
-        Friend    = 3,
+        Friend = 3,
     }
 
     public partial class RelationFriend : IDisposable
@@ -123,7 +123,7 @@ namespace PushToPlay.Model
                         Model.RelationFriend.DeleteFriend(userBase_, userTarget_);
                         break;
                     case RelationFriendEnum.Pending:
-                        if(deny)
+                        if (deny)
                         {
                             Model.RelationFriend.DenyRequest(userBase_, userTarget_);
                         }

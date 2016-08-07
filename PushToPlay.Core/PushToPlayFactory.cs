@@ -6,6 +6,7 @@ using System.IO;
 using System.Configuration;
 using PushToPlay.Core.PlatformFactory.Steam;
 using PushToPlay.Core.PlatformFactory.GiantBomb;
+using System.Threading.Tasks;
 
 namespace PushToPlay.Core
 {
@@ -77,11 +78,18 @@ namespace PushToPlay.Core
                         // UPDATE 
                     }
                 }
-            }     
+            }
         }
 
-        public void InitializeDBGames(string platforms_ = "")
+        private void ProcessMultiThreadDBGames(int index)
         {
+            Model.Game _game = null;
+            Model.Genre _genre = null;
+            Model.GameDetail _gameDetail = null;
+
+            Model.GiantBomb.GameDetailResponse.GiantBombGameDetailResponse _gameDetailResponse = null;
+            Model.GiantBomb.ReleasesResponse.GiantBombReleasesResponse _gameReleaseResponse = null;
+
             bool _defaultIconImageUsed = false;
             bool _defaultMediumUsed = false;
             string _defaultIconImageName = string.Empty;
@@ -89,265 +97,95 @@ namespace PushToPlay.Core
             string _iconImageName = string.Empty;
             string _mediumImageName = string.Empty;
 
-            Model.Game _game = null;
-            Model.Genre _genre = null;
-            Model.GameDetail _gameDetail = null;
-            Model.GiantBomb.GameResponse.GiantBombGamesResponse _gameListResponse = null;
-            Model.GiantBomb.GameDetailResponse.GiantBombGameDetailResponse _gameDetailResponse = null;
-            Model.GiantBomb.ReleasesResponse.GiantBombReleasesResponse _gameReleaseResponse = null;
-
             using (GiantBombFactory _gbFactory = new GiantBombFactory())
             {
-                _gameListResponse = _gbFactory.GetGameList(platforms_);
+                Model.GiantBomb.GameResponse.Result _result = listResults[index];
 
-                foreach (Model.GiantBomb.GameResponse.Result _result in _gameListResponse.results)                
+                _gameDetailResponse = _gbFactory.GetGameDetail(_result.id.ToString());
+
+                _game = Model.Game.GetGameByGiantBombId(_result.id);
+
+                _defaultIconImageUsed = false;
+                _defaultIconImageName = null;
+
+                _defaultMediumUsed = false;
+                _defaultMediumImageName = null;
+
+                if (_game == null)
                 {
-                    _gameDetailResponse = _gbFactory.GetGameDetail(_result.id.ToString());
-                    
-                    _game = Model.Game.GetGameByGiantBombId(_result.id);
+                    _game = new Model.Game();
+                    _game.Name = _result.name;
+                    _game.Description = _result.deck;
+                    _game.GiantBombID = _result.id;
+                    _game.Aliases = _result.aliases;
 
-                    _defaultIconImageUsed = false;
-                    _defaultIconImageName = null;
-
-                    _defaultMediumUsed = false;
-                    _defaultMediumImageName = null;
-
-                    if (_game == null)
+                    /* Get Image */
+                    if (_result.image != null)
                     {
-                        _game = new Model.Game();                        
-                        _game.Name = _result.name;
-                        _game.Description = _result.deck;
-                        _game.GiantBombID = _result.id;
-                        _game.Aliases = _result.aliases;
+                        _defaultIconImageName = string.Concat(_game.GiantBombID, "_icon", ".jpg");
+                        _defaultMediumImageName = string.Concat(_game.GiantBombID, "_medium", ".jpg");
 
-                        /* Get Image */
-                        if (_result.image != null)
+                        if (!File.Exists(Path.Combine(_path, _defaultIconImageName)))
                         {
-                            _defaultIconImageName = string.Concat(_game.GiantBombID, "_icon", ".jpg");
-                            _defaultMediumImageName = string.Concat(_game.GiantBombID, "_medium", ".jpg");
-
-                            if (!File.Exists(Path.Combine(_path, _defaultIconImageName)))
+                            if (_result.image.thumb_url != null)
                             {
-                                if (_result.image.thumb_url != null)
-                                {
-                                    if (!Helpers.NetHelper.DownloadPicture(_result.image.thumb_url, Path.Combine(_path, _defaultIconImageName)))
-                                        _defaultIconImageName = null;
-                                }
-                                else
+                                if (!Helpers.NetHelper.DownloadPicture(_result.image.thumb_url, Path.Combine(_path, _defaultIconImageName)))
                                     _defaultIconImageName = null;
                             }
+                            else
+                                _defaultIconImageName = null;
+                        }
 
-                            if (!File.Exists(Path.Combine(_path, _defaultMediumImageName)))
+                        if (!File.Exists(Path.Combine(_path, _defaultMediumImageName)))
+                        {
+                            if (_result.image.medium_url != null)
                             {
-                                if (_result.image.medium_url != null)
-                                {
-                                    if (!Helpers.NetHelper.DownloadPicture(_result.image.medium_url, Path.Combine(_path, _defaultMediumImageName)))
-                                        _defaultMediumImageName = null;
-                                }
-                                else
+                                if (!Helpers.NetHelper.DownloadPicture(_result.image.medium_url, Path.Combine(_path, _defaultMediumImageName)))
                                     _defaultMediumImageName = null;
                             }
-                        }
-                        else
-                        {
-                            _defaultIconImageName = null;
-                            _defaultMediumImageName = null;
-                        }
-
-                        if (_gameDetailResponse != null)
-                        {
-                            /* Get GameDetail using api */
-                            if (_gameDetailResponse.number_of_total_results > 0)
-                            {
-
-                                /* Get Developers */
-                                if (_gameDetailResponse.results.developers != null &&
-                                    _gameDetailResponse.results.developers.Count > 0)
-                                    _game.Developer = _gameDetailResponse.results.developers[0].name;
-
-                                /* Get Publishers */
-                                if (_gameDetailResponse.results.publishers != null &&
-                                    _gameDetailResponse.results.publishers.Count > 0)
-                                    _game.Publisher = _gameDetailResponse.results.publishers[0].name;
-
-                                /* Genres */
-                                if (_gameDetailResponse.results.genres != null)
-                                {
-                                    foreach (var _item in _gameDetailResponse.results.genres)
-                                    {
-                                        _genre = Model.Genre.GetByGiantBombId(_item.id);
-
-                                        if (_genre != null)
-                                            _game.Genres.Add(_genre);
-                                    }
-                                }
-
-                                /* Platforms */
-                                foreach (var _item in _gameDetailResponse.results.platforms)
-                                {
-                                    if (_gbFactory.PlatformIds.Contains(_item.id.ToString()))
-                                    {
-                                        _gameDetail = new Model.GameDetail();
-                                        _gameDetail.Platform = Model.Platform.GetPlatformByGiantBombId(_item.id);
-                                        _gameDetail.PlatformId = _gameDetail.Platform.Id;
-
-                                        _iconImageName = null;
-                                        _mediumImageName = null;
-
-                                        /* Get releases by platforms and region code using api */
-                                        _gameReleaseResponse = _gbFactory.GetReleaseDetail(_item.id, _result.id);
-                                        if (_gameReleaseResponse != null)
-                                        {
-                                            foreach (var _itemRelease in _gameReleaseResponse.results)
-                                            {
-                                                if (_itemRelease.name == _game.Name)
-                                                {
-                                                    if (_itemRelease.release_date != null)
-                                                    {
-                                                            _gameDetail.ReleaseDate = new DateTime(Convert.ToInt32(_itemRelease.release_date.Substring(0, 4)),
-                                                                                                    Convert.ToInt32(_itemRelease.release_date.Substring(5, 2)),
-                                                                                                    Convert.ToInt32(_itemRelease.release_date.Substring(8, 2)));
-                                                    }
-                                                    else
-                                                    {
-                                                        if (_result.original_release_date != null)
-                                                            try
-                                                            {
-                                                                _gameDetail.ReleaseDate = new DateTime(Convert.ToInt32(((string)_result.original_release_date).Substring(0, 4)),
-                                                                                                       Convert.ToInt32(((string)_result.original_release_date).Substring(5, 2)),
-                                                                                                       Convert.ToInt32(((string)_result.original_release_date).Substring(8, 2)));
-                                                            }
-                                                            catch { }
-                                                    }
-                                                }
-
-                                                if (_itemRelease.name == _game.Name &&
-                                                    _itemRelease.image != null)
-                                                {
-
-                                                    /* Validate game Name */
-                                                    if (_itemRelease.name == _game.Name)
-                                                    {
-                                                        _iconImageName = string.Concat(_game.GiantBombID, "_", Model.Platform.TranslatePlatform(_item.id), "_icon", ".jpg");
-
-                                                        if (_itemRelease.image != null)
-                                                        {
-                                                            if (!File.Exists(Path.Combine(_path, _iconImageName)))
-                                                            {
-                                                                if (_itemRelease.image.thumb_url != null)
-                                                                {
-                                                                    if (!Helpers.NetHelper.DownloadPicture(_itemRelease.image.thumb_url, Path.Combine(_path, _iconImageName)))
-                                                                        _iconImageName = null;
-                                                                }
-                                                                else
-                                                                    _iconImageName = null;
-                                                            }
-
-                                                            _mediumImageName = string.Concat(_game.GiantBombID, "_", Model.Platform.TranslatePlatform(_item.id), "_medium", ".jpg");
-
-                                                            if (!File.Exists(Path.Combine(_path, _mediumImageName)))
-                                                            {
-                                                                if (_itemRelease.image.medium_url != null)
-                                                                {
-                                                                    if (!Helpers.NetHelper.DownloadPicture(_itemRelease.image.medium_url, Path.Combine(_path, _mediumImageName)))
-                                                                        _mediumImageName = null;
-                                                                }
-                                                                else
-                                                                    _mediumImageName = null;
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            _iconImageName = null;
-                                                            _mediumImageName = null;
-                                                        }
-                                                    }
-                                                    break;
-                                                }
-                                            }
-                                        }
-
-                                        if (string.IsNullOrWhiteSpace(_iconImageName) &&
-                                            !string.IsNullOrWhiteSpace(_defaultIconImageName))
-                                        {
-                                            _iconImageName = _defaultIconImageName;
-                                            _defaultIconImageUsed = true;
-                                        }
-
-                                        if (string.IsNullOrWhiteSpace(_mediumImageName) &&
-                                            !string.IsNullOrWhiteSpace(_defaultMediumImageName))
-                                        {
-                                            _mediumImageName = _defaultMediumImageName;
-                                            _defaultMediumUsed = true;
-                                        }
-
-                                        _gameDetail.IconImage = _iconImageName;
-                                        _gameDetail.GameImage = _mediumImageName;
-
-                                        bool _alreadyIn = false;
-                                        foreach (var detail in _game.GameDetails)
-                                        {
-                                            if (detail.PlatformId == _gameDetail.PlatformId)
-                                                _alreadyIn = true;
-                                        }
-
-                                        if (!_alreadyIn)
-                                            _game.GameDetails.Add(_gameDetail);
-                                    }
-                                }
-                            }
-
-                            _game.Add();
+                            else
+                                _defaultMediumImageName = null;
                         }
                     }
                     else
                     {
-                        /* Platforms */
-                        foreach (var _item in _gameDetailResponse.results.platforms)
+                        _defaultIconImageName = null;
+                        _defaultMediumImageName = null;
+                    }
+
+                    if (_gameDetailResponse != null)
+                    {
+                        /* Get GameDetail using api */
+                        if (_gameDetailResponse.number_of_total_results > 0)
                         {
-                            if (_gbFactory.PlatformIds.Contains(_item.id.ToString()))
+
+                            /* Get Developers */
+                            if (_gameDetailResponse.results.developers != null &&
+                                _gameDetailResponse.results.developers.Count > 0)
+                                _game.Developer = _gameDetailResponse.results.developers[0].name;
+
+                            /* Get Publishers */
+                            if (_gameDetailResponse.results.publishers != null &&
+                                _gameDetailResponse.results.publishers.Count > 0)
+                                _game.Publisher = _gameDetailResponse.results.publishers[0].name;
+
+                            /* Genres */
+                            if (_gameDetailResponse.results.genres != null)
                             {
-                                _defaultIconImageName = null;
-                                _defaultMediumImageName = null;
-
-                                _gameDetail = Model.GameDetail.GetGameDetailByGiantBombPlatform(_game.Id, _item.id);
-
-                                if (_gameDetail == null)
+                                foreach (var _item in _gameDetailResponse.results.genres)
                                 {
-                                    /* Get Image */
-                                    if (_result.image != null)
-                                    {
-                                        _defaultIconImageName = string.Concat(_game.GiantBombID, "_icon", ".jpg");
-                                        _defaultMediumImageName = string.Concat(_game.GiantBombID, "_medium", ".jpg");
+                                    _genre = Model.Genre.GetByGiantBombId(_item.id);
 
-                                        if (!File.Exists(Path.Combine(_path, _defaultIconImageName)))
-                                        {
-                                            if (_result.image.thumb_url != null)
-                                            {
-                                                if (!Helpers.NetHelper.DownloadPicture(_result.image.thumb_url, Path.Combine(_path, _defaultIconImageName)))
-                                                    _defaultIconImageName = null;
-                                            }
-                                            else
-                                                _defaultIconImageName = null;
-                                        }
+                                    if (_genre != null)
+                                        _game.Genres.Add(_genre);
+                                }
+                            }
 
-                                        if (!File.Exists(Path.Combine(_path, _defaultMediumImageName)))
-                                        {
-                                            if (_result.image.medium_url != null)
-                                            {
-                                                if (!Helpers.NetHelper.DownloadPicture(_result.image.medium_url, Path.Combine(_path, _defaultMediumImageName)))
-                                                    _defaultMediumImageName = null;
-                                            }
-                                            else
-                                                _defaultMediumImageName = null;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        _defaultIconImageName = null;
-                                        _defaultMediumImageName = null;
-                                    }
-
+                            /* Platforms */
+                            foreach (var _item in _gameDetailResponse.results.platforms)
+                            {
+                                if (_gbFactory.PlatformIds.Contains(_item.id.ToString()))
+                                {
                                     _gameDetail = new Model.GameDetail();
                                     _gameDetail.Platform = Model.Platform.GetPlatformByGiantBombId(_item.id);
                                     _gameDetail.PlatformId = _gameDetail.Platform.Id;
@@ -365,9 +203,9 @@ namespace PushToPlay.Core
                                             {
                                                 if (_itemRelease.release_date != null)
                                                 {
-                                                        _gameDetail.ReleaseDate = new DateTime(Convert.ToInt32(_itemRelease.release_date.Substring(0, 4)),
-                                                                                                Convert.ToInt32(_itemRelease.release_date.Substring(5, 2)),
-                                                                                                Convert.ToInt32(_itemRelease.release_date.Substring(8, 2)));
+                                                    _gameDetail.ReleaseDate = new DateTime(Convert.ToInt32(_itemRelease.release_date.Substring(0, 4)),
+                                                                                            Convert.ToInt32(_itemRelease.release_date.Substring(5, 2)),
+                                                                                            Convert.ToInt32(_itemRelease.release_date.Substring(8, 2)));
                                                 }
                                                 else
                                                 {
@@ -385,6 +223,7 @@ namespace PushToPlay.Core
                                             if (_itemRelease.name == _game.Name &&
                                                 _itemRelease.image != null)
                                             {
+
                                                 /* Validate game Name */
                                                 if (_itemRelease.name == _game.Name)
                                                 {
@@ -441,39 +280,213 @@ namespace PushToPlay.Core
                                         _defaultMediumUsed = true;
                                     }
 
-                                    _gameDetail.Game = _game;
-                                    _gameDetail.GameId = _game.Id;
                                     _gameDetail.IconImage = _iconImageName;
                                     _gameDetail.GameImage = _mediumImageName;
-                                    _gameDetail.Add();
-                                    _gameDetail = null;
+
+                                    bool _alreadyIn = false;
+                                    foreach (var detail in _game.GameDetails)
+                                    {
+                                        if (detail.PlatformId == _gameDetail.PlatformId)
+                                            _alreadyIn = true;
+                                    }
+
+                                    if (!_alreadyIn)
+                                        _game.GameDetails.Add(_gameDetail);
+                                }
+                            }
+                        }
+
+                        _game.Add();
+                    }
+                }
+                else
+                {
+                    /* Platforms */
+                    foreach (var _item in _gameDetailResponse.results.platforms)
+                    {
+                        if (_gbFactory.PlatformIds.Contains(_item.id.ToString()))
+                        {
+                            _defaultIconImageName = null;
+                            _defaultMediumImageName = null;
+
+                            _gameDetail = Model.GameDetail.GetGameDetailByGiantBombPlatform(_game.Id, _item.id);
+
+                            if (_gameDetail == null)
+                            {
+                                /* Get Image */
+                                if (_result.image != null)
+                                {
+                                    _defaultIconImageName = string.Concat(_game.GiantBombID, "_icon", ".jpg");
+                                    _defaultMediumImageName = string.Concat(_game.GiantBombID, "_medium", ".jpg");
+
+                                    if (!File.Exists(Path.Combine(_path, _defaultIconImageName)))
+                                    {
+                                        if (_result.image.thumb_url != null)
+                                        {
+                                            if (!Helpers.NetHelper.DownloadPicture(_result.image.thumb_url, Path.Combine(_path, _defaultIconImageName)))
+                                                _defaultIconImageName = null;
+                                        }
+                                        else
+                                            _defaultIconImageName = null;
+                                    }
+
+                                    if (!File.Exists(Path.Combine(_path, _defaultMediumImageName)))
+                                    {
+                                        if (_result.image.medium_url != null)
+                                        {
+                                            if (!Helpers.NetHelper.DownloadPicture(_result.image.medium_url, Path.Combine(_path, _defaultMediumImageName)))
+                                                _defaultMediumImageName = null;
+                                        }
+                                        else
+                                            _defaultMediumImageName = null;
+                                    }
                                 }
                                 else
                                 {
-                                    /* UPDATE GAME DETAIL */
-                                }        
+                                    _defaultIconImageName = null;
+                                    _defaultMediumImageName = null;
+                                }
+
+                                _gameDetail = new Model.GameDetail();
+                                _gameDetail.Platform = Model.Platform.GetPlatformByGiantBombId(_item.id);
+                                _gameDetail.PlatformId = _gameDetail.Platform.Id;
+
+                                _iconImageName = null;
+                                _mediumImageName = null;
+
+                                /* Get releases by platforms and region code using api */
+                                _gameReleaseResponse = _gbFactory.GetReleaseDetail(_item.id, _result.id);
+                                if (_gameReleaseResponse != null)
+                                {
+                                    foreach (var _itemRelease in _gameReleaseResponse.results)
+                                    {
+                                        if (_itemRelease.name == _game.Name)
+                                        {
+                                            if (_itemRelease.release_date != null)
+                                            {
+                                                _gameDetail.ReleaseDate = new DateTime(Convert.ToInt32(_itemRelease.release_date.Substring(0, 4)),
+                                                                                        Convert.ToInt32(_itemRelease.release_date.Substring(5, 2)),
+                                                                                        Convert.ToInt32(_itemRelease.release_date.Substring(8, 2)));
+                                            }
+                                            else
+                                            {
+                                                if (_result.original_release_date != null)
+                                                    try
+                                                    {
+                                                        _gameDetail.ReleaseDate = new DateTime(Convert.ToInt32(((string)_result.original_release_date).Substring(0, 4)),
+                                                                                               Convert.ToInt32(((string)_result.original_release_date).Substring(5, 2)),
+                                                                                               Convert.ToInt32(((string)_result.original_release_date).Substring(8, 2)));
+                                                    }
+                                                    catch { }
+                                            }
+                                        }
+
+                                        if (_itemRelease.name == _game.Name &&
+                                            _itemRelease.image != null)
+                                        {
+                                            /* Validate game Name */
+                                            if (_itemRelease.name == _game.Name)
+                                            {
+                                                _iconImageName = string.Concat(_game.GiantBombID, "_", Model.Platform.TranslatePlatform(_item.id), "_icon", ".jpg");
+
+                                                if (_itemRelease.image != null)
+                                                {
+                                                    if (!File.Exists(Path.Combine(_path, _iconImageName)))
+                                                    {
+                                                        if (_itemRelease.image.thumb_url != null)
+                                                        {
+                                                            if (!Helpers.NetHelper.DownloadPicture(_itemRelease.image.thumb_url, Path.Combine(_path, _iconImageName)))
+                                                                _iconImageName = null;
+                                                        }
+                                                        else
+                                                            _iconImageName = null;
+                                                    }
+
+                                                    _mediumImageName = string.Concat(_game.GiantBombID, "_", Model.Platform.TranslatePlatform(_item.id), "_medium", ".jpg");
+
+                                                    if (!File.Exists(Path.Combine(_path, _mediumImageName)))
+                                                    {
+                                                        if (_itemRelease.image.medium_url != null)
+                                                        {
+                                                            if (!Helpers.NetHelper.DownloadPicture(_itemRelease.image.medium_url, Path.Combine(_path, _mediumImageName)))
+                                                                _mediumImageName = null;
+                                                        }
+                                                        else
+                                                            _mediumImageName = null;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    _iconImageName = null;
+                                                    _mediumImageName = null;
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                if (string.IsNullOrWhiteSpace(_iconImageName) &&
+                                    !string.IsNullOrWhiteSpace(_defaultIconImageName))
+                                {
+                                    _iconImageName = _defaultIconImageName;
+                                    _defaultIconImageUsed = true;
+                                }
+
+                                if (string.IsNullOrWhiteSpace(_mediumImageName) &&
+                                    !string.IsNullOrWhiteSpace(_defaultMediumImageName))
+                                {
+                                    _mediumImageName = _defaultMediumImageName;
+                                    _defaultMediumUsed = true;
+                                }
+
+                                _gameDetail.Game = _game;
+                                _gameDetail.GameId = _game.Id;
+                                _gameDetail.IconImage = _iconImageName;
+                                _gameDetail.GameImage = _mediumImageName;
+                                _gameDetail.Add();
+                                _gameDetail = null;
+                            }
+                            else
+                            {
+                                /* UPDATE GAME DETAIL */
                             }
                         }
                     }
+                }
 
 
-                    if (!_defaultIconImageUsed){
-                        if (!string.IsNullOrWhiteSpace(_defaultIconImageName))
-                        {
-                            if (File.Exists(Path.Combine(_path, _defaultIconImageName)))
-                                File.Delete(Path.Combine(_path, _defaultIconImageName));
-                        }
+                if (!_defaultIconImageUsed)
+                {
+                    if (!string.IsNullOrWhiteSpace(_defaultIconImageName))
+                    {
+                        if (File.Exists(Path.Combine(_path, _defaultIconImageName)))
+                            File.Delete(Path.Combine(_path, _defaultIconImageName));
                     }
+                }
 
-                    if (!_defaultMediumUsed){
-                        if (!string.IsNullOrWhiteSpace(_defaultMediumImageName))
-                        {
-                            if (File.Exists(Path.Combine(_path, _defaultMediumImageName)))
-                                File.Delete(Path.Combine(_path, _defaultMediumImageName));
-                        }
+                if (!_defaultMediumUsed)
+                {
+                    if (!string.IsNullOrWhiteSpace(_defaultMediumImageName))
+                    {
+                        if (File.Exists(Path.Combine(_path, _defaultMediumImageName)))
+                            File.Delete(Path.Combine(_path, _defaultMediumImageName));
                     }
                 }
             }
+        }
+
+        List<Model.GiantBomb.GameResponse.Result> listResults;
+        public void InitializeDBGames(string platforms_ = "")
+        {
+            Model.GiantBomb.GameResponse.GiantBombGamesResponse _gameListResponse = null;
+            using (GiantBombFactory _gbFactory = new GiantBombFactory())
+            {
+                _gameListResponse = _gbFactory.GetGameList(platforms_);
+                listResults = _gameListResponse.results;
+            }
+
+            Parallel.For(0, listResults.Count, ProcessMultiThreadDBGames);
         }
 
         private void BindAppSteam(Model.Game _game, Model.Steam.SteamAppDetailAPI _steamAppDetail)
@@ -738,7 +751,7 @@ namespace PushToPlay.Core
                         }
                     }
                 }
-            }                        
+            }
         }
 
         public void DeleteUnusedImage()

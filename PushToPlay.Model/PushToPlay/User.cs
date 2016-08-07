@@ -202,7 +202,7 @@ namespace PushToPlay.Model
                                   U.* ";
 
                 _where = string.Format(@" FROM DBO.USERS U,
-                                               DBO.RELATIONFRIEND RF
+                                               DBO.RELATIONFRIENDS RF
                                          WHERE RF.USERBASEID = {0}
                                            AND RF.USERTARGETID = U.ID ", userId_);
 
@@ -238,7 +238,7 @@ namespace PushToPlay.Model
             {
                 string _queryString = string.Format(@"SELECT U.* 
                                                         FROM DBO.USERS U,
-                                                         DBO.RELATIONFRIEND RF
+                                                         DBO.RELATIONFRIENDS RF
                                                        WHERE RF.USERBASEID = {0}
                                                          AND RF.USERTARGETID = {1}
                                                          AND U.ID = RF.USERTARGETID", userId_, friendId_);

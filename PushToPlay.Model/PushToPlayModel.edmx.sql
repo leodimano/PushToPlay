@@ -216,7 +216,7 @@ CREATE TABLE [dbo].[UserGames] (
 );
 GO
 
--- Creating table 'RelationFriends'
+-- Creating table 'RELATIONFRIEND'
 CREATE TABLE [dbo].[RelationFriends] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Status] int  NOT NULL,
@@ -319,7 +319,7 @@ ADD CONSTRAINT [PK_UserGames]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'RelationFriends'
+-- Creating primary key on [Id] in table 'RELATIONFRIEND'
 ALTER TABLE [dbo].[RelationFriends]
 ADD CONSTRAINT [PK_RelationFriends]
     PRIMARY KEY CLUSTERED ([Id] ASC);
@@ -461,7 +461,7 @@ ON [dbo].[UserGames]
     ([GameDetailId]);
 GO
 
--- Creating foreign key on [UserTargetId] in table 'RelationFriends'
+-- Creating foreign key on [UserTargetId] in table 'RELATIONFRIEND'
 ALTER TABLE [dbo].[RelationFriends]
 ADD CONSTRAINT [FK_RelationFriendUser]
     FOREIGN KEY ([UserTargetId])
@@ -472,12 +472,12 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_RelationFriendUser'
 CREATE INDEX [IX_FK_RelationFriendUser]
-ON [dbo].[RelationFriends]
+ON [dbo].[RELATIONFRIEND]
     ([UserTargetId]);
 GO
 
--- Creating foreign key on [UserBaseId] in table 'RelationFriends'
-ALTER TABLE [dbo].[RelationFriends]
+-- Creating foreign key on [UserBaseId] in table 'RELATIONFRIEND'
+ALTER TABLE [dbo].[RELATIONFRIEND]
 ADD CONSTRAINT [FK_RelationFriendUser1]
     FOREIGN KEY ([UserBaseId])
     REFERENCES [dbo].[Users]
@@ -487,7 +487,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_RelationFriendUser1'
 CREATE INDEX [IX_FK_RelationFriendUser1]
-ON [dbo].[RelationFriends]
+ON [dbo].[RELATIONFRIEND]
     ([UserBaseId]);
 GO
 

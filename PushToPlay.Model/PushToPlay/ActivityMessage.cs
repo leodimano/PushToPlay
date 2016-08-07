@@ -241,7 +241,7 @@ namespace PushToPlay.Model
                                       (AM.TARGETTYPE = {0} AND AM.TARGETID = {1} AND AM.MESSAGETYPE = {2} AND AM.ReplyToMessage = 0)              
                                 UNION
                             SELECT AM.*
-                                FROM RELATIONFRIEND RF,
+                                FROM RelationFriends RF,
                                      ActivityMessages as AM
                                 WHERE RF.USERBASEID = {1}
                                 AND RF.STATUS     = 3
@@ -258,7 +258,7 @@ namespace PushToPlay.Model
 				                            (AM.TARGETTYPE = {0} AND AM.TARGETID = {1} AND AM.MESSAGETYPE    = {2} AND AM.ReplyToMessage = 0)              
 			                         UNION
 		                            SELECT AM.*
-			                          FROM RELATIONFRIEND RF,
+			                          FROM RelationFriends RF,
 			                               ActivityMessages as AM
 			                         WHERE RF.USERBASEID = {1}
 			                           AND RF.STATUS     = 3
@@ -326,7 +326,7 @@ namespace PushToPlay.Model
             }
         }
 
-        
+
         public static void CreateActivity(int BaseId_,
                                           MessageSourceTypeEnum BaseType_,
                                           int TargetId_,
@@ -400,9 +400,9 @@ namespace PushToPlay.Model
             {
                 string _queryCount = @"SELECT COUNT(1) FROM ({0}) AS CONTA ";
 
-                string _queryString = string.Format(GetGameSQL, 
-                                                    (int)MessageSourceTypeEnum.Game, 
-                                                    gameDetailId, 
+                string _queryString = string.Format(GetGameSQL,
+                                                    (int)MessageSourceTypeEnum.Game,
+                                                    gameDetailId,
                                                     string.Empty);
 
                 _queryCount = string.Format(_queryCount, _queryString);
@@ -411,12 +411,12 @@ namespace PushToPlay.Model
 
                 if (_listReturn.TotalObject > 0)
                 {
-                    _queryString = string.Format(@"SELECT * FROM ({0}) AS T WHERE RowNum >= {1} and RowNum <= {2}", 
-                                                 string.Format(GetGameSQL, 
-                                                               (int)MessageSourceTypeEnum.Game, 
-                                                               gameDetailId, 
+                    _queryString = string.Format(@"SELECT * FROM ({0}) AS T WHERE RowNum >= {1} and RowNum <= {2}",
+                                                 string.Format(GetGameSQL,
+                                                               (int)MessageSourceTypeEnum.Game,
+                                                               gameDetailId,
                                                                GetSQLComplement),
-                                                 _listReturn.GetMinRowNum, 
+                                                 _listReturn.GetMinRowNum,
                                                  _listReturn.GetMaxRowNum);
 
                     var _query = _context.Database.SqlQuery<ActivityMessageProcessed>(_queryString);
@@ -436,9 +436,9 @@ namespace PushToPlay.Model
             {
                 string _queryCount = @"SELECT COUNT(1) FROM ({0}) AS CONTA ";
 
-                string _queryString = string.Format(GetGroupSQL, 
-                                                    (int)MessageSourceTypeEnum.Group, 
-                                                    groupId_, 
+                string _queryString = string.Format(GetGroupSQL,
+                                                    (int)MessageSourceTypeEnum.Group,
+                                                    groupId_,
                                                     string.Empty);
 
                 _queryCount = string.Format(_queryCount, _queryString);
@@ -447,12 +447,12 @@ namespace PushToPlay.Model
 
                 if (_listReturn.TotalObject > 0)
                 {
-                    _queryString = string.Format(@"SELECT * FROM ({0}) AS T WHERE RowNum >= {1} and RowNum <= {2}", 
-                                                 string.Format(GetGroupSQL, 
-                                                               (int)MessageSourceTypeEnum.Group, 
+                    _queryString = string.Format(@"SELECT * FROM ({0}) AS T WHERE RowNum >= {1} and RowNum <= {2}",
+                                                 string.Format(GetGroupSQL,
+                                                               (int)MessageSourceTypeEnum.Group,
                                                                groupId_,
-                                                               GetSQLComplement), 
-                                                 _listReturn.GetMinRowNum, 
+                                                               GetSQLComplement),
+                                                 _listReturn.GetMinRowNum,
                                                  _listReturn.GetMaxRowNum);
 
                     var _query = _context.Database.SqlQuery<ActivityMessageProcessed>(_queryString);

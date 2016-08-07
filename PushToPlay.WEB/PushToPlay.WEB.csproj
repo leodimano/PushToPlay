@@ -27,6 +27,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -231,6 +232,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\boxe\placeholder.txt" />
     <Content Include="Content\images\Arrow-Down.png" />
     <Content Include="Content\images\Arrow-Up.png" />
     <Content Include="Content\images\platform\nuuvem.png" />
@@ -265,6 +267,7 @@
     <Content Include="Content\themes\base\minified\images\ui-icons_e3a21a_256x240.png" />
     <Content Include="Content\themes\base\minified\images\ui-icons_ffc40d_256x240.png" />
     <Content Include="Content\themes\base\minified\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="Content\user\placeholder.txt" />
     <Content Include="Scripts\jquery-ui-1.10.4.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
     <Content Include="Content\icons.css" />
@@ -412,7 +415,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51236</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
